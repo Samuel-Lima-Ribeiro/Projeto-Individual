@@ -13,12 +13,20 @@ body {
 
 /*HEADER*/
 header {
-  padding: 9px 0;
-  background-color: #265078;
+  padding: 13px 0;
+  background-image: url(../assets/img/tela_login2.png);
+  background-size: cover;
+}
+
+.titulo h1{
+  font-size: 40px;
+  color: black;
+  -webkit-text-stroke-width: 1px; /* largura da borda */
+  -webkit-text-stroke-color: #edd70c; /* cor da borda */
 }
 
 .container {
-    width: 80%;
+    width: 95%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -26,14 +34,10 @@ header {
     justify-content: start;
 }
 
-.titulo img{
-  height: 70px;
-}
-
 .navegacao {
-  width: 350px;
+  width: 300px;
   color: #FFF;
-  margin-left: 35%;
+  margin: 0 80px 0 280px;
 }
 
 .navegacao ul {
@@ -48,7 +52,7 @@ header {
 }
 
 .navegacao ul li {
-  font-size: 1rem;
+  font-size: 18px;
   cursor: pointer;
 }
 
@@ -57,11 +61,18 @@ header {
   color: #E0FEFF;
 }
 
+.usuario {
+  font-size: 20px;
+  align-items: center;
+  margin-left: 200px;
+}
+
 /*RODAPÉ/FOOTER*/
 
 footer {
     padding: 45px 0;
-    background-color: #265078;
+    background-image: url(../assets/img/tela_login2.png);
+      background-size: cover;
   }
   
   footer .container {

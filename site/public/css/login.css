@@ -1,6 +1,6 @@
 .banner {
-    background-image: url("../assets/img/background_white.jpg");
-    padding: 100px 0;
+    background-image: url("../assets/img/tela_login.png");
+    padding: 60px 0;
     background-size: cover;
     
   }
@@ -12,8 +12,9 @@
 }
 
 .caixa-formulario {
-    background-color: #FFF;
-    padding: 60px 100px;
+    background-color:#181818;
+    padding: 90px 80px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,7 +23,7 @@
 }
 
 .container .caixa-formulario h2 {
-    color: #36353F;
+    color: #edd70c;
     margin-bottom: 20px;
     font-size: 30px;
     font-weight: bold;
@@ -36,7 +37,7 @@
 }
 
 .campo label {
-    color: #32b9cd;
+    color: #edd70c;
     font-size: 15px;
     padding: 10px 0;
     font-weight: bold;
@@ -46,17 +47,20 @@
     padding: 15px;
     /* border: 3px solid #8f8f8f; */
     width: 350px;
+    background-color: #484848;
+    border-bottom: #edd700 solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
 }
 
-.caixa-formulario img {
-    height: 100px;
-}
 
 .caixa-formulario button {
     margin-top: 20px;
     width: 180px;
-    color: #FFF;
-    background-color: #32b9cd;
+    color:#f4f5ea;
+    background-color: #484848;
     padding: 10px 20px;
     font-size: 18px; 
     font-weight: bold;
@@ -69,10 +73,3 @@
 }
 
 
-@media screen and (max-width: 1366px) {
-    .navegacao {
-        width: 390px;
-        color: #FFF;
-        margin-left: 24%;
-      }
-}

@@ -102,12 +102,3 @@ footer {
     border-left: none;
     border-right: none;
 }
-
-
-@media screen and (max-width: 1366px) {
-    .navegacao {
-        width: 390px;
-        color: #FFF;
-        margin-left: 24%;
-      }
-}

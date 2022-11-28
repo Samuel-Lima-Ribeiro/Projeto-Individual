@@ -18,20 +18,22 @@ header {
   background-size: cover;
 }
 
-.titulo h1{
+.titulo h1 {
   font-size: 40px;
   color: black;
-  -webkit-text-stroke-width: 1px; /* largura da borda */
-  -webkit-text-stroke-color: #edd70c; /* cor da borda */
+  -webkit-text-stroke-width: 1px;
+  /* largura da borda */
+  -webkit-text-stroke-color: #edd70c;
+  /* cor da borda */
 }
 
 .container {
-    width: 95%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
 }
 
 .navegacao {
@@ -70,29 +72,34 @@ header {
 /*RODAPÉ/FOOTER*/
 
 footer {
-    padding: 45px 0;
-    background-image: url(../assets/img/tela_login2.png);
-      background-size: cover;
-  }
-  
-  footer .container {
-    justify-content: center;
-  }
-  
-  footer p {
-    color: #fff;
-  }
-
-  .error {
-    border-bottom: red solid !important ;
-    border-top: none;
-    border-left: none;
-    border-right: none;
+  padding: 20px 0;
+  background-image: url(../assets/img/tela_login2.png);
+  background-size: cover;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.confirmar {
-    border-bottom: green solid !important; 
-    border-top: none;
-    border-left: none;
-    border-right: none;
+footer .container {
+  justify-content: center;
+}
+
+footer p {
+  color: #fff;
+}
+
+.direitos {
+  width: 80%;
+  height: 80%;
+  align-items: center;
+  text-align: center;
+}
+
+.informacoes{
+  margin: 0 0 0 -5px;
+  padding: 10px;
+}
+
+.direitos p{
+  margin: 30px 200px 0 15px;
+  width: 88%;
 }

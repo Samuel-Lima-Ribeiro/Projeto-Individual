@@ -5,10 +5,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="shortcut icon" href="assets/img/ordem-jedi.png" sizes="32x32"/>
+  <title>Cadastro</title>
+  <link rel="shortcut icon" href="assets/img/ordem-jedi.png" sizes="32x32" />
   <link rel="stylesheet" href="css/estilos-gerais.css">
-  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/cadastro.css">
+  <script src="js/funcoes.js"></script>
 </head>
 
 <body>
@@ -16,55 +17,326 @@
   <header>
     <div class="container">
       <div class="titulo">
-          <h1>STAR WARS</h1>
+        <h1>STAR WARS</h1>
       </div>
 
       <div class="navegacao">
         <ul>
-            <li class="agora"><a href="index.html">Início</a></li>
-            <li>|</li>
-            <li><a href="login.html">Login</a></li>
-            <li>|</li>
-            <li><a href="cadastro.html">Cadastro</a></li>
-            <li>|</li>
-            <li><a href="cadastro.html">Quiz</a></li>
+          <li><a href="index.html">Início</a></li>
+          <li>|</li>
+          <li><a href="login.html">Login</a></li>
+          <li>|</li>
+          <li class="agora"><a href="cadastro.html">Cadastro</a></li>
         </ul>
       </div>
 
-    <div class="usuario" >
-      <span></span>
     </div>
 
-    </div>
   </header>
   <main>
     <section class="banner">
-      <div class="container">
-        <div class="caixa-formulario">
-          <h2>Entre na sua conta</h2>
-          <div class="campo">
-            <label for="email">Nome:</label>
-            <input type="email" id="email" placeholder="email@email.com">
-          </div><br>
-          <div class="campo">
-            <label for="senha">Email:</label>
-            <input type="password" id="senha" placeholder="********">
-          </div><br>
-          <div class="campo">
-            <label for="senha">Email:</label>
-            <input type="password" id="senha" placeholder="********">
-          </div><br>
 
-          <button onclick="validar_login()">Entrar</button>
+      <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
         </div>
-      </div>
+
+        <div class="container">
+          <div class="caixa-formulario">
+            <h2>Cadastre-se</h2>
+            <div class="campo">
+              <label for="nome">Nome:</label>
+              <input onkeyup="validarNome()" type="email" id="input_nome" placeholder="Anakin">
+              <span id="campo_confirmar_nome"></span>
+            </div>
+            <div class="campo">
+              <label for="input_dtNascimento">Data de nascimento:</label>
+              <input onkeyup="validarData()" type="date" id="input_dtNascimento">
+              <span id="campo_confirmar_data"></span>
+            </div>
+            <div class="campo">
+              <label for="input_email">Email:</label>
+              <input onkeyup="validarEmail()" type="email" id="input_email" placeholder="ex: anakin@gmail.com">
+              <span id="campo_confirmar_email"></span>
+            </div>
+            <div class="campo">
+              <label for="input_senha">Senha:</label>
+              <input onkeyup="validarSenha()" type="password" id="input_senha" placeholder="********">
+              <span id="campo_confirmar_senha"></span>
+            </div>
+            <span id="mensagem_erro"></span>
+
+            <div id="div_aguardar" class="loading-div">
+              <img src="" id="loading-gif">
+            </div>
+
+            <button onclick="cadastrar()">Entrar</button>
+            <button onclick="obterHoraAtual()"></button>
+          </div>
+        </div>
+
     </section>
   </main>
   <footer>
     <div class="container">
-      <p>SmartIce &copy; 2022 todos os direitos reservados</p>
+      <div class="informacoes">
+        <p>Usuarios <br>
+          cadastrados: <span id="qtd_usuarios">0</span></p> <br>
+        <p>Hora atual: <span id="horas_atual"></span></p>
+      </div>
+      <div class="direitos">
+        <p>Samuel Lima Ribeiro &copy; 2022 todos os direitos reservados</p>
+      </div>
     </div>
   </footer>
 </body>
 
 </html>
+
+<script>
+  let proximaAtualizacao;
+  window.onload = obterNumerosUsarios();
+  window.onload = obterHoraAtual()
+
+  var validacaoNome = false
+  var validacaoEmail = false
+  var validacaoSenha = false
+  var validacaoData = false
+
+  function validarNome() {
+    var nomeVar = input_nome.value
+
+    if (nomeVar != "") {
+      if (nomeVar.length >= 4) {
+
+        validacaoNome = true
+
+        input_nome.classList.add("confirmar")
+        input_nome.classList.remove("error")
+        campo_confirmar_nome.innerHTML = ""
+
+      } else {
+
+        campo_confirmar_nome.innerHTML = "No mínimo 4 caracteres"
+        campo_confirmar_nome.style.color = "red"
+
+
+        input_nome.classList.add("error")
+        input_nome.classList.remove("confirmar")
+
+        validacaoNome = false
+      }
+    } else {
+      campo_confirmar_nome.innerHTML = "Preencha o campo"
+      campo_confirmar_nome.style.color = "red"
+
+      validacaoNome = false
+      input_nome.classList.add("error")
+      input_nome.classList.remove("confirmar")
+    }
+  }
+
+  function validarData() {
+    var dataVar = input_dtNascimento.value
+
+    if (dataVar.length > 9) {
+      validacaoData = true
+
+      input_dtNascimento.classList.add("confirmar")
+      input_dtNascimento.classList.remove("error")
+
+      campo_confirmar_data.innerHTML = ""
+    } else {
+      validacaoData = false
+
+      input_dtNascimento.classList.add("error")
+      input_dtNascimento.classList.remove("confirmar")
+
+      campo_confirmar_data.innerHTML = "Preencha o campo"
+      campo_confirmar_data.style.color = "red"
+    }
+  }
+
+  function validarEmail() {
+    var emailVar = input_email.value.trim()
+
+    if (emailVar.indexOf(" ") > 0) {
+      validacaoEmail = false
+
+      input_email.classList.add("error")
+      input_email.classList.remove("confirmar")
+      campo_confirmar_email.style.color = "red"
+      campo_confirmar_email.innerHTML = "Email inválido, retire os espaços!"
+
+
+    } else if ((emailVar.indexOf("@sptech.school") > 3 || emailVar.indexOf("@gmail.com") > 3) && emailVar.indexOf("@") > 3) {
+      validacaoEmail = true
+
+      campo_confirmar_email.style.color = "green"
+      campo_confirmar_email.innerHTML = "Email válido"
+      input_email.classList.remove("error")
+      input_email.classList.add("confirmar")
+    } else {
+      validacaoEmail = false
+
+      input_email.classList.add("error")
+      input_email.classList.remove("confirmar")
+      campo_confirmar_email.style.color = "red"
+      campo_confirmar_email.innerHTML = "Email inválido"
+    }
+  }
+
+  function validarSenha() {
+    var senhaVar = input_senha.value
+
+    if (senhaVar.startsWith(" ") || senhaVar.endsWith(" ")) {
+      validacaoSenha = false
+
+      campo_confirmar_senha.style.color = "Red"
+      campo_confirmar_senha.innerHTML = "A senha não pode começar nem terminar com um espaço"
+      input_senha.classList.add("error")
+    } else { /* validação da senha, se tem 6 letras ou mais */
+      if (senhaVar.length >= 6) {
+        validacaoSenha = true
+
+        input_senha.classList.remove("error")
+        input_senha.classList.add("confirmar")
+        campo_confirmar_senha.style.color = "Green"
+        campo_confirmar_senha.innerHTML = "(pelo menos 6 caracteres)"
+      } else {
+        validacaoSenha = false
+
+        input_senha.classList.remove("confirmar")
+        input_senha.classList.add("error")
+        campo_confirmar_senha.innerHTML = "(pelo menos 6 caracteres)"
+        campo_confirmar_senha.style.color = "Red"
+      }
+
+    }
+  }
+
+  function cadastrar() {
+    var nomeVar = input_nome.value;
+    var emailVar = input_email.value.trim();
+    var senhaVar = input_senha.value;
+    var dataVar = input_dtNascimento.value;
+
+    if (nomeVar != "" && emailVar != "" && senhaVar != "" && dataVar != "") {
+      mensagem_erro.innerHTML = ""
+      if (validacaoNome && validacaoEmail && validacaoSenha && validacaoData) {
+        if (nomeVar == "" || emailVar == "" || senhaVar == "" || dataVar == "") {
+          cardErro.style.display = "block"
+          mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+
+          finalizarAguardar();
+          return false;
+        }
+        else {
+          setInterval(sumirMensagem, 3000)
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            nomeServer: nomeVar,
+            emailServer: emailVar,
+            senhaServer: senhaVar,
+            dataServer: dataVar
+          })
+        }).then(function (resposta) {
+
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            cardErro.style.display = "block";
+
+            mensagem_erro.style.color = "green"
+            mensagem_erro.innerHTML = `
+            <br> <br>Cadastro realizado com sucesso! 
+            <br>Redirecionando para tela de Login...`;
+
+            setTimeout(() => {
+              window.location = "login.html";
+            }, "2000")
+
+            limparFormulario();
+            finalizarAguardar();
+          } else {
+            throw ("Houve um erro ao tentar realizar o cadastro!");
+          }
+        }).catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+          finalizarAguardar();
+        });
+
+        return false;
+      }
+    } else {
+      mensagem_erro.innerHTML = `<br>Preencha todos os campos!`;
+      mensagem_erro.style.color = "Red"
+
+      if (nomeVar.length < 1) {
+        input_nome.classList.add("error")
+      }
+
+      if (emailVar.length < 1) {
+        input_email.classList.add("error")
+      }
+
+      if (dataVar.length < 1) {
+        input_dtNascimento.classList.add("error")
+      }
+
+      if (senhaVar.length < 1) {
+        input_senha.classList.add("error")
+      }
+    }
+  }
+
+
+  function sumirMensagem() {
+    cardErro.style.display = "none"
+  }
+
+
+
+
+  function obterHoraAtual(idSensor) {
+
+    if (proximaAtualizacao != undefined) {
+      clearTimeout(proximaAtualizacao);
+    }
+
+    fetch(`/medidas/horaAtual/${idSensor}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (respostaHora) {
+          console.log(`Dados recebidos: ${JSON.stringify(respostaHora)}`);
+          respostaHora.reverse();
+
+          plotarHora(respostaHora);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+
+  function plotarHora(respostaHora, idSensor) {
+
+    for (i = 0; i < respostaHora.length; i++) {
+      var registroHora = respostaHora[i];
+      var horaAtual = registroHora.horaAtual
+    }
+
+    var horas_atual = document.getElementById("horas_atual")
+    horas_atual.innerHTML = horaAtual
+  }
+</script>

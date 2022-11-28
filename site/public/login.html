@@ -6,9 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="shortcut icon" href="assets/img/ordem-jedi.png" sizes="32x32"/>
+  <link rel="shortcut icon" href="assets/img/ordem-jedi.png" sizes="32x32" />
   <link rel="stylesheet" href="css/estilos-gerais.css">
   <link rel="stylesheet" href="css/login.css">
+  <script src="js/funcoes.js"></script>
 </head>
 
 <body>
@@ -16,27 +17,21 @@
   <header>
     <div class="container">
       <div class="titulo">
-          <h1>STAR WARS</h1>
+        <h1>STAR WARS</h1>
       </div>
 
       <div class="navegacao">
         <ul>
-            <li class="agora"><a href="index.html">Início</a></li>
-            <li>|</li>
-            <li><a href="login.html">Login</a></li>
-            <li>|</li>
-            <li><a href="cadastro.html">Cadastro</a></li>
-            <li>|</li>
-            <li><a href="cadastro.html">Quiz</a></li>
+          <li><a href="index.html">Início</a></li>
+          <li>|</li>
+          <li><a href="login.html">Login</a></li>
+          <li>|</li>
+          <li class="agora"><a href="cadastro.html">Cadastro</a></li>
         </ul>
       </div>
-
-    <div class="usuario" >
-      <span></span>
-    </div>
-
     </div>
   </header>
+
   <main>
     <section class="banner">
       <div class="container">
@@ -44,21 +39,41 @@
           <h2>Entre na sua conta</h2>
           <div class="campo">
             <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="email@email.com">
+            <input type="email" id="input_email" placeholder="email@email.com">
           </div><br>
           <div class="campo">
             <label for="senha">Senha:</label>
-            <input type="password" id="senha" placeholder="********">
+            <input type="password" id="input_senha" placeholder="********">
           </div><br>
 
-          <button onclick="validar_login()">Entrar</button>
+          <button onclick="entrar()">Entrar</button>
         </div>
       </div>
+      <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+          <span id="mensagem_erro"></span>
+        </div>
+
+        <div id="div_aguardar" class="loading-div">
+          <img src="./assets/img/loading.gif" id="loading-gif">
+        </div>
+
+        <div id="div_erros_login">
+
+        </div>
     </section>
+
   </main>
   <footer>
     <div class="container">
-      <p>SmartIce &copy; 2022 todos os direitos reservados</p>
+      <div class="informacoes">
+        <p>Usuarios <br>
+          cadastrados: <span id="qtd_usuarios">0</span></p> <br>
+        <p>Hora atual: <span id="horas_atual"></span></p>
+      </div>
+      <div class="direitos">
+        <p>Samuel Lima Ribeiro &copy; 2022 todos os direitos reservados</p>
+      </div>
     </div>
   </footer>
 </body>
@@ -66,16 +81,77 @@
 </html>
 
 <script>
+  let proximaAtualizacao;
+  window.onload = obterNumerosUsarios();
 
-  function validar_login() {
-    var email_usuario = email.value
-    var senha_usuario = senha.value
 
-    if (email_usuario.length > 0 && senha_usuario.length > 0) {
-      window.location.href = "index.html"
+  function entrar() {
+    aguardar();
+
+    var emailVar = input_email.value;
+    var senhaVar = input_senha.value;
+
+    if (emailVar == "" || senhaVar == "") {
+      cardErro.style.display = "block"
+      mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+      finalizarAguardar();
+      return false;
+    }
+    else {
+      setInterval(sumirMensagem, 3000)
     }
 
+    console.log("FORM LOGIN: ", emailVar);
+    console.log("FORM SENHA: ", senhaVar);
 
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+
+          sessionStorage.EMAIL_USUARIO = json.email;
+          sessionStorage.NOME_USUARIO = json.nome;
+          sessionStorage.ID_USUARIO = json.id;
+
+          setTimeout(function () {
+            window.location = "./dashboard/cards.html";
+          }, 1000); // apenas para exibir o loading
+
+        });
+
+      } else {
+
+        console.log("Houve um erro ao tentar realizar o login!");
+
+        resposta.text().then(texto => {
+          console.error(texto);
+          finalizarAguardar(texto);
+        });
+      }
+
+    }).catch(function (erro) {
+      console.log(erro);
+    })
+
+    return false;
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none"
   }
 
 </script>

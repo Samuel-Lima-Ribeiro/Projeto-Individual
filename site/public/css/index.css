@@ -7,28 +7,17 @@ html {
 /*BANNER*/
 
 .banner {
-    background-size: cover;
-  }
-
-/* carrossel */
-
-.carrossel {
-  box-shadow: 2px 2px 4px black;
-  overflow: hidden;
-  height: 100%;
   width: 100%;
+  box-shadow: 0px 5px 20px 2px #000000;
 }
 
-.containerCarrossel {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-  transform: translateX(0);
-}
-
-img{
-  object-fit: cover;
-  height: 100%;
+.image-banner {
   width: 100%;
+  height: 80vh;
+  background-image: url(../assets/img/abertura_star_wars.gif);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-top: 10vh;
 }
 
 .descricao{
@@ -50,7 +39,7 @@ img{
   
  
 .banner-sobre{
-  background-image: url(../assets/img/item1.png);
+  background-color: #222;
   width: 100%;
   background-size: cover;
   display: flex;
@@ -175,3 +164,11 @@ img{
     color: #fff;
   }
 
+  .image-banner {
+    width: 100%;
+    height: 80vh;
+    background-image: url(../assets/img/retorno-jedi.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding-top: 10vh;
+}

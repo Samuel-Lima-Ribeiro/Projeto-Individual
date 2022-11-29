@@ -7,6 +7,10 @@ router.get("/ultimas/:idAquario", function (req, res) {
     medidaController.qtdUsuarios(req, res);
 });
 
+router.get("/Parabens/:idAquario", function (req, res) {
+    medidaController.buscarData(req, res);
+});
+
 router.get("/horaAtual/:idAquario", function (req, res) {
     medidaController.buscaHoraAtual(req, res);
 });

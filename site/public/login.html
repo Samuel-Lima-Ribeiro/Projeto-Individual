@@ -130,13 +130,14 @@
 
           sessionStorage.EMAIL_USUARIO = json.email;
           sessionStorage.NOME_USUARIO = json.nome;
-          sessionStorage.ID_USUARIO = json.id;
+          sessionStorage.ID_USUARIO = json.idUsuario;
+          sessionStorage.ANIVERSARIO_USUARIO = 0;
 
           mensagem_erro.innerHTML = `Login realizado! <br>
             Carregando...`;
           mensagem_erro.style.color = "green"
           setTimeout(function () {
-            window.location = "./IndexUsuario.html";
+            window.location = "IndexUsuario.html";
           }, 2000); // apenas para exibir o loading
 
         });
@@ -160,6 +161,55 @@
 
   function sumirMensagem() {
     cardErro.style.display = "none"
+  }
+
+</script>
+
+<script>
+
+// FUNCAO PARABENS
+
+window.onload = alertaParabens();
+
+function alertaParabens(idSensor) {
+var idSensor = sessionStorage.ID_USUARIO
+
+if (proximaAtualizacao != undefined) {
+    clearTimeout(proximaAtualizacao);
+}
+
+fetch(`/medidas/Parabens/${idSensor}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+
+            plotarGrafico(resposta);
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+    }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+function plotarGrafico(resposta, idSensor) {
+
+      for (i = 0; i < resposta.length; i++) {
+          var registro = resposta[i];
+          var data = registro.aniversario
+      }
+
+      var alertaFoiDado = Number(sessionStorage.ANIVERSARIO_USUARIO)
+      if(!alertaFoiDado){
+        if(data != null) {
+          alert("Parbéns!!!!!!!!!!!!!!!!!!!!!!")
+          sessionStorage.ANIVERSARIO_USUARIO = 1
+        }
+      }
+
   }
 
 </script>

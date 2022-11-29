@@ -57,11 +57,11 @@ select DATE_FORMAT(now(),'%H:%i:%s') as horaAtual;
 insert into usuario (nome, email, senha, dtNasc) values
 ('samuel', 'samuca@gmail.com', '123', '2003-02-10');
 
-
-
-
 select * from usuario;
 
+-- funcao aniversario
+select DATE_FORMAT(dtNasc, '%d-%m') as aniversario from usuario where idUsuario = 6 
+and DATE_FORMAT(dtNasc, '%d-%m') like DATE_FORMAT(now(), '%d-%m') ;
 
 
 

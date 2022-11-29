@@ -25,7 +25,7 @@
 }
 
 .container .caixa-formulario h2 {
-  color: #edd70c;
+  color: #f4f5ead0;
   margin: 0 0 30px 0;
   font-size: 30px;
   font-weight: bold;
@@ -39,7 +39,7 @@
 }
 
 .campo label {
-  color: #edd70c;
+  color: #f4f5ead0;
   font-size: 15px;
   padding: 10px 0;
   font-weight: bold;
@@ -51,10 +51,10 @@
   background-color: #484848;
   border-radius: 3px;
   outline: none;
-  border-bottom: 3px solid #edd70c;
-  border-top: 3px solid #edd70c;
-  border-left: 3px solid #edd70c;
-  border-right: 3px solid #edd70c;
+  border-bottom: 3px solid #f4f5ead0;
+  border-top: 3px solid #f4f5ead0;
+  border-left: 3px solid #f4f5ead0;
+  border-right: 3px solid #f4f5ead0;
   border-radius: 3px;
 }
 

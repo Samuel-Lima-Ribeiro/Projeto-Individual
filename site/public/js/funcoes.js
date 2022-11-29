@@ -90,3 +90,66 @@ function obterNumerosUsarios(idSensor) {
       }
 
 // MOSTRAR HORA ATUAL
+function obterHoraAtual(idAquario) {
+
+    if (proximaAtualizacao != undefined) {
+      clearTimeout(proximaAtualizacao);
+    }
+
+    fetch(`/medidas/horaAtual/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+
+          plotarHora(resposta);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+
+  function plotarHora(resposta, idAquario) {
+
+    for (i = 0; i < resposta.length; i++) {
+      var registroHora = resposta[i];
+      var horaAtual = registroHora.horaAtual
+    }
+
+    var horas_atual = document.getElementById("horas_atual")
+    horas_atual.innerHTML = horaAtual
+
+    setTimeout(() => atualizarHora(idAquario), 1000)
+  }
+
+  function atualizarHora(idAquario) {
+
+    fetch(`/medidas/tempo-real/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (novoRegistro) {
+
+          var horaAtual = novoRegistro[0].horaAtual
+
+          var horas_atual = document.getElementById("horas_atual")
+          horas_atual.innerHTML = horaAtual
+
+
+          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+          proximaAtualizacao = setTimeout(() => atualizarHora(idAquario), 1000);
+        });
+
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+        proximaAtualizacao = setTimeout(() => atualizarHora(idAquario), 1000);
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+
+  }

@@ -19,11 +19,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 0px 42px 12px rgba(0,0,0,0.41);
+    -webkit-box-shadow: 0px 0px 27px 0px rgba(191,174,191,1);
+    -moz-box-shadow: 0px 0px 27px 0px rgba(191,174,191,1);
+    box-shadow: 0px 0px 27px 0px rgba(191,174,191,1);
+    
 }
 
 .container .caixa-formulario h2 {
-    color: #edd70c;
+    color: #f4f5ead0;
     margin-bottom: 20px;
     font-size: 30px;
     font-weight: bold;
@@ -38,7 +41,7 @@
 }
 
 .campo label {
-    color: #edd70c;
+    color: #f4f5ead0;
     font-size: 15px;
     padding: 10px 0;
     font-weight: bold;
@@ -50,10 +53,10 @@
     background-color: #484848;
     border-radius: 3px;
     outline: none;
-    border-bottom: 3px solid #edd70c; 
-    border-top: 3px solid #edd70c;
-    border-left: 3px solid #edd70c;
-    border-right: 3px solid #edd70c;
+    border-bottom: 3px solid #f4f5ead0; 
+    border-top: 3px solid #f4f5ead0;
+    border-left: 3px solid #f4f5ead0;
+    border-right: 3px solid #f4f5ead0;
     border-radius: 3px;
 }
 
@@ -68,6 +71,7 @@
     font-weight: bold;
     border: none;
     cursor: pointer;
+    border-radius: 6px;
 }
 
 .caixa-formulario button:hover{

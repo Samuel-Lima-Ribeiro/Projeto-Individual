@@ -16,6 +16,7 @@ header {
   padding: 13px 0;
   background-image: url(../assets/img/tela_login2.png);
   background-size: cover;
+  border-bottom: 1px gray solid;
 }
 
 .titulo h1 {
@@ -77,6 +78,7 @@ footer {
   background-size: cover;
   display: flex;
   justify-content: flex-end;
+  border-top: 1px gray solid;;
 }
 
 footer .container {

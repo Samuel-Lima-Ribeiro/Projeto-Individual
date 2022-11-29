@@ -69,8 +69,7 @@
               <img src="" id="loading-gif">
             </div>
 
-            <button onclick="cadastrar()">Entrar</button>
-            <button onclick="obterHoraAtual()"></button>
+            <button onclick="cadastrar()">Cadastrar</button>
           </div>
         </div>
 
@@ -301,42 +300,5 @@
 
   function sumirMensagem() {
     cardErro.style.display = "none"
-  }
-
-
-
-
-  function obterHoraAtual(idSensor) {
-
-    if (proximaAtualizacao != undefined) {
-      clearTimeout(proximaAtualizacao);
-    }
-
-    fetch(`/medidas/horaAtual/${idSensor}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (respostaHora) {
-          console.log(`Dados recebidos: ${JSON.stringify(respostaHora)}`);
-          respostaHora.reverse();
-
-          plotarHora(respostaHora);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
-  }
-
-  function plotarHora(respostaHora, idSensor) {
-
-    for (i = 0; i < respostaHora.length; i++) {
-      var registroHora = respostaHora[i];
-      var horaAtual = registroHora.horaAtual
-    }
-
-    var horas_atual = document.getElementById("horas_atual")
-    horas_atual.innerHTML = horaAtual
   }
 </script>

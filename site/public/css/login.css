@@ -1,94 +1,98 @@
 .banner {
-    background-image: url("../assets/img/tela_login.png");
-    padding: 60px 0;
-    background-size: cover;
-    
-  }
-  
+  background-image: url("../assets/img/tela_login.png");
+  padding: 60px 0;
+  background-size: cover;
+}
+
 .banner .container {
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .caixa-formulario {
-    background-color:#181818;
-    padding: 90px 80px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 0px 42px 12px rgba(0,0,0,0.41);
+  background-color: #181818;
+  padding: 90px 80px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-shadow: 0px 0px 27px 0px rgba(191, 174, 191, 1);
+  -moz-box-shadow: 0px 0px 27px 0px rgba(191, 174, 191, 1);
+  box-shadow: 0px 0px 27px 0px rgba(191, 174, 191, 1);
+
 }
 
 .container .caixa-formulario h2 {
-    color: #edd70c;
-    margin: 0 0 30px  0;
-    font-size: 30px;
-    font-weight: bold;
+  color: #edd70c;
+  margin: 0 0 30px 0;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .campo {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .campo label {
-    color: #edd70c;
-    font-size: 15px;
-    padding: 10px 0;
-    font-weight: bold;
+  color: #edd70c;
+  font-size: 15px;
+  padding: 10px 0;
+  font-weight: bold;
 }
 
 .campo input {
-    padding: 15px;
-    /* border: 3px solid #8f8f8f; */
-    width: 350px;
-    background-color: #484848;
-    border-bottom: #edd700 solid;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    outline: none;
+  padding: 15px;
+  width: 350px;
+  background-color: #484848;
+  border-radius: 3px;
+  outline: none;
+  border-bottom: 3px solid #edd70c;
+  border-top: 3px solid #edd70c;
+  border-left: 3px solid #edd70c;
+  border-right: 3px solid #edd70c;
+  border-radius: 3px;
 }
 
 
 .caixa-formulario button {
-    margin-top: 20px;
-    width: 180px;
-    color:#f4f5ea;
-    background-color: #484848;
-    padding: 10px 20px;
-    font-size: 18px; 
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
+  margin: 30px 0 0 0;
+  width: 180px;
+  color: #f4f5ea;
+  background-color: #484848;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
 }
 
-.caixa-formulario button:hover{
-    opacity: 0.8;
+.caixa-formulario button:hover {
+  opacity: 0.8;
 }
 
 .loading-div {
-    width: 50px;
-    margin: auto;
-    display: none;
-  }
-  
-  .loading-div img {
-    height: 50px;
-    width: 50px;
-  }
+  width: 50px;
+  margin: auto;
+  display: none;
+}
 
-  .alerta_erro{
-    display: flex;
-    justify-content: flex-end;
-  }
+.loading-div img {
+  height: 50px;
+  width: 50px;
+}
 
-  .card_erro #mensagem_erro{
-    font-weight: 500;
-    font-size: 20px;
-  }
+.alerta_erro {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card_erro #mensagem_erro {
+  font-weight: 500;
+  font-size: 20px;
+}

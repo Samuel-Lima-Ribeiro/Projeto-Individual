@@ -43,13 +43,13 @@ function buscaHoraAtual(req, res) {
 }
 
 
-function buscarMedidasEmTempoReal(req, res) {
+function buscarUltimaHoraAtual(req, res) {
 
     var idAquario = req.params.idAquario;
 
     console.log(`Recuperando medidas em tempo real`);
 
-    medidaModel.buscarMedidasEmTempoReal(idAquario).then(function (resultado) {
+    medidaModel.buscarUltimaHoraAtual(idAquario).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -65,6 +65,6 @@ function buscarMedidasEmTempoReal(req, res) {
 module.exports = {
     qtdUsuarios,
     buscaHoraAtual,
-    buscarMedidasEmTempoReal
+    buscarUltimaHoraAtual
 
 }

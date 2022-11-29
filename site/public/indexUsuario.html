@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página Inicial</title>
+    <link rel="shortcut icon" href="assets/img/ordem-jedi.png" sizes="32x32" />
+    <link rel="stylesheet" href="css/estilos-gerais.css" />
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/funcoes.js"></script>
+</head>
+
+<body>
+    <!--HEADER-->
+    <header>
+        <div class="container">
+            <div class="titulo">
+                <h1>STAR WARS</h1>
+            </div>
+
+
+            <div class="navegacao">
+                <ul>
+                    <li class="agora"><a href="index.html">Perfil</a></li>
+                    <li>|</li>
+                    <li><a href="login.html">Universo</a></li>
+                    <li>|</li>
+                    <li><a href="cadastro.html">Quiz</a></li>
+                    <li>|</li>
+                    <li onclick="limparSessao()"><a href="login.html">Sair</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <button></button>
+            </div>
+        </div>
+    </header>
+    <!--CONTEÚDO DA PÁGINA-->
+    <main>
+        <div class="carrossel">
+
+
+        </div>
+
+        <div class="banner-sobre">
+            <div class="container">
+                <div class="caixas">
+                    <div class="caixa">
+                        <h3>Escolha o seu caminho!</h3>
+                        <div class="descricao">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id dolorum aspernatur qui
+                                reiciendis tempora a quod, amet, vitae sapiente, ipsum tenetur facilis? In dolorem
+                                aperiam magni ipsa. Beatae, facilis. Enim.</p>
+
+                            <button> <a href="quiz.html"> Faça o quiz agora!</a> </button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </main>
+    <!--RODAPÉ/FOOTER-->
+    <footer>
+        <div class="container">
+          <div class="informacoes">
+            <p>Usuarios <br>
+              cadastrados: <span id="qtd_usuarios">0</span></p> <br>
+            <p>Hora atual: <span id="horas_atual"></span></p>
+          </div>
+          <div class="direitos">
+            <p>Samuel Lima Ribeiro &copy; 2022 todos os direitos reservados</p>
+          </div>
+        </div>
+      </footer>
+</body>
+
+</html>
+
+<script>
+      let proximaAtualizacao;
+  window.onload = obterNumerosUsarios();
+  window.onload = obterHoraAtual()
+</script>

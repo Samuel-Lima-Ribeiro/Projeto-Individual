@@ -12,7 +12,7 @@ router.get("/horaAtual/:idAquario", function (req, res) {
 });
 
 router.get("/tempo-real/:idAquario", function (req, res) {
-    medidaController.buscarMedidasEmTempoReal(req, res);
+    medidaController.buscarUltimaHoraAtual(req, res);
 })
 
 module.exports = router;

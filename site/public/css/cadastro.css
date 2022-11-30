@@ -1,8 +1,7 @@
 .banner {
     background-image: url("../assets/img/tela_login.png");
     padding: 60px 0;
-    background-size: cover;
-    
+    background-size: cover;    
   }
   
 .banner .container {
@@ -50,6 +49,7 @@
 .campo input {
     padding: 15px;
     width: 350px;
+    color: #f4f5ead0;
     background-color: #484848;
     border-radius: 3px;
     outline: none;

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/estilos-gerais.css">
+    <link rel="stylesheet" href="css/personagem.css">
+    <script src="js/funcoes.js"></script>
+</head>
+<body>
+      <!--HEADER-->
+  <header>
+    <div class="container">
+        <div class="titulo">
+          <h1>STAR WARS</h1>
+        </div>
+  
+        <div class="navegacao">
+          <ul>
+            <li><a href="index.html">Perfil</a></li>
+            <li>|</li>
+            <li class="agora"><a href="personagem.html">Universo</a></li>
+            <li>|</li>
+            <li><a href="#">Quiz</a></li>
+            <li>|</li>
+            <li onclick="limparSessao()"><a href="login.html">Sair</a></li>
+          </ul>
+        </div>
+      </div>
+  </header>
+
+  <main>
+
+    <div class="bannerPersonagem">
+        <h1 class="nomePersonagem">Yoda</h1>
+        <div class="infoPersonagem">
+            <div class="descPersonagem">
+                <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de tudo. O maior professor, o fracasso é..</p>
+            </div>
+                <img class="imgYodaTela">
+        </div>
+        <div class="frase">
+            <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de tudo. O maior professor, o fracasso é "</h2>
+        </div>
+    </div>
+
+    <div class="bannerPersonagem">
+        <h1 class="nomePersonagem">Luke</h1>
+        <div class="infoPersonagem">
+            <div class="descPersonagem">
+                <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de tudo. O maior professor, o fracasso é..</p>
+            </div>
+                <img class="imglukeTela">
+        </div>
+        <div class="frase">
+            <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de tudo. O maior professor, o fracasso é "</h2>
+        </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="informacoes">
+        <p>Usuarios <br>
+          cadastrados: <span id="qtd_usuarios">0</span></p> <br>
+        <p>Hora atual: <span id="horas_atual"></span></p>
+      </div>
+      <div class="direitos">
+        <p>Samuel Lima Ribeiro &copy; 2022 todos os direitos reservados</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
+<script>
+    let proximaAtualizacao;
+    window.onload = obterNumerosUsarios();
+    window.onload = obterHoraAtual();
+
+</script>

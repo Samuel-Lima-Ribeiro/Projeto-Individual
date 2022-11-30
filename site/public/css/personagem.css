@@ -1,0 +1,56 @@
+.banner {
+    background-image: url("../assets/img/tela_login.png");
+    padding: 60px 0;
+    background-size: cover;    
+  }
+
+main {
+    margin: 0px 80px;
+}
+
+.bannerPersonagem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 3px gray solid;
+}
+
+.nomePersonagem {
+    text-align: center;
+    margin: 10px 0 0 0;
+    font-size: 35px;
+}
+
+.infoPersonagem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.descPersonagem {
+    text-align: center;
+    align-items: center;
+    margin: 0 50px 0;
+}
+
+.frase {
+    text-align: center;
+    margin: 5px 60px 0;
+    padding: 0px 0px 15px 0;
+}
+
+.imgYodaTela {
+    padding: 75px 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../assets/personagens/yodaInfo.jpg");
+    border-radius: 20px;
+}
+
+.imglukeTela {
+    padding: 75px 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../assets/personagens/lukeInfo.jpg");
+    border-radius: 20px;
+}

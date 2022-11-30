@@ -63,7 +63,7 @@ function buscarData(idAquario, limite_linhas) {
                     where fk_aquario = ${idAquario}
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select DATE_FORMAT(dtNasc, '%d-%m') as aniversario from usuario where ${idAquario} = 6 
+        instrucaoSql = `select DATE_FORMAT(dtNasc, '%d-%m') as aniversario from usuario where idUsuario = ${idAquario} 
         and DATE_FORMAT(dtNasc, '%d-%m') like DATE_FORMAT(now(), '%d-%m');`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");

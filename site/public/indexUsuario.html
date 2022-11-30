@@ -2,96 +2,136 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Página Inicial</title>
-    <link rel="shortcut icon" href="assets/img/ordem-jedi.png" sizes="32x32" />
-    <link rel="stylesheet" href="css/estilos-gerais.css" />
-    <link rel="stylesheet" href="css/index.css">
-    <script src="js/funcoes.js"></script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Página Inicial</title>
+  <link rel="shortcut icon" href="assets/img/ordem-jedi.png" sizes="32x32" />
+  <link rel="stylesheet" href="css/estilos-gerais.css" />
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/indexUsuario.css">
+  <script src="js/funcoes.js"></script>
 </head>
 
 <body>
-    <!--HEADER-->
-    <header>
-        <div class="container">
-            <div class="titulo">
-                <h1>STAR WARS</h1>
-            </div>
+  <!--HEADER-->
+  <header>
+    <div class="container">
+      <div class="titulo">
+        <h1>STAR WARS</h1>
+      </div>
+
+      <div class="navegacao">
+        <ul>
+          <li class="agora"><a href="index.html">Perfil</a></li>
+          <li>|</li>
+          <li><a href="personagem.html">Universo</a></li>
+          <li>|</li>
+          <li><a href="#">Quiz</a></li>
+          <li>|</li>
+          <li onclick="limparSessao()"><a href="login.html">Sair</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!--CONTEÚDO DA PÁGINA-->
+  <main>
+    <!--Banner-->
+    <div class="image-banner">
+      <!-- <video autoplay muted loop src="./assets/img/giphy.mp4"></video> -->
+    </div>
 
 
-            <div class="navegacao">
-                <ul>
-                    <li class="agora"><a href="index.html">Perfil</a></li>
-                    <li>|</li>
-                    <li><a href="login.html">Universo</a></li>
-                    <li>|</li>
-                    <li><a href="cadastro.html">Quiz</a></li>
-                    <li>|</li>
-                    <li onclick="limparSessao()"><a href="login.html">Sair</a></li>
-                </ul>
-            </div>
+    <div class="banner-sobre">
+      <div class="container">
+        <div class="caixas">
+          <div class="caixa">
+            <h3>Escolha o seu caminho!</h3>
+            <div class="descricao">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id dolorum aspernatur qui reiciendis tempora
+                a quod, amet, vitae sapiente, ipsum tenetur facilis? In dolorem aperiam magni ipsa. Beatae, facilis.
+                Enim.</p>
 
-            <div>
-                <button></button>
-            </div>
-        </div>
-    </header>
-    <!--CONTEÚDO DA PÁGINA-->
-    <main>
-        <div class="carrossel">
-
-
-        </div>
-
-        <div class="banner-sobre">
-            <div class="container">
-                <div class="caixas">
-                    <div class="caixa">
-                        <h3>Escolha o seu caminho!</h3>
-                        <div class="descricao">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id dolorum aspernatur qui
-                                reiciendis tempora a quod, amet, vitae sapiente, ipsum tenetur facilis? In dolorem
-                                aperiam magni ipsa. Beatae, facilis. Enim.</p>
-
-                            <button> <a href="quiz.html"> Faça o quiz agora!</a> </button>
-
-                        </div>
-                    </div>
-
-                </div>
+              <button> <a href="quiz.html"> Faça o quiz agora!</a> </button>
 
             </div>
-        </div>
-
-
-
-
-
-
-
-    </main>
-    <!--RODAPÉ/FOOTER-->
-    <footer>
-        <div class="container">
-          <div class="informacoes">
-            <p>Usuarios <br>
-              cadastrados: <span id="qtd_usuarios">0</span></p> <br>
-            <p>Hora atual: <span id="horas_atual"></span></p>
           </div>
-          <div class="direitos">
-            <p>Samuel Lima Ribeiro &copy; 2022 todos os direitos reservados</p>
-          </div>
+
         </div>
-      </footer>
+
+      </div>
+    </div>
+
+  </main>
+  <!--RODAPÉ/FOOTER-->
+  <footer>
+    <div class="container">
+      <div class="informacoes">
+        <p>Usuarios <br>
+          cadastrados: <span id="qtd_usuarios">0</span></p> <br>
+        <p>Hora atual: <span id="horas_atual"></span></p>
+      </div>
+      <div class="direitos">
+        <p>Samuel Lima Ribeiro &copy; 2022 todos os direitos reservados</p>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>
 
 <script>
-let proximaAtualizacao;
-window.onload = obterNumerosUsarios();
-window.onload = obterHoraAtual();
+  let proximaAtualizacao;
+  window.onload = obterNumerosUsarios();
+  window.onload = obterHoraAtual();
+  window.onload = alertaParabens();
+
+
+  // FUNCAO PARABENS
+
+
+  function alertaParabens(idSensor) {
+    var idSensor = sessionStorage.ID_USUARIO
+
+    if (proximaAtualizacao != undefined) {
+      clearTimeout(proximaAtualizacao);
+    }
+
+    fetch(`/medidas/Parabens/${idSensor}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+
+          plotarGraficoParabens(resposta);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+
+  function plotarGraficoParabens(resposta, idSensor) {
+
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      var data = registro.aniversario
+    }
+
+    var alertaFoiDado = Number(sessionStorage.ANIVERSARIO_USUARIO)
+    if (!alertaFoiDado) {
+      if (data != null) {
+        alert("Parabéns! Que a força esteja com você!")
+        sessionStorage.ANIVERSARIO_USUARIO = 1
+      }
+    }
+
+  }
+
+
 
 </script>

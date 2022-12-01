@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/estilos-gerais.css">
+    <link rel="stylesheet" href="css/pazaak.css">
+    <script src="js/funcoes.js"></script>
+</head>
+
+<body>
+    <!--HEADER-->
+    <header>
+        <div class="container">
+            <div class="titulo">
+                <h1>STAR WARS</h1>
+            </div>
+
+            <div class="navegacao">
+                <ul>
+                    <li><a href="indexUsuario.html">Perfil</a></li>
+                    <li>|</li>
+                    <li><a href="personagem.html">Universo</a></li>
+                    <li>|</li>
+                    <li class="agora"><a href="pazaak.html">Parzaak</a></li>
+                    <li>|</li>
+                    <li onclick="limparSessao()"><a href="login.html">Sair</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="titulo">
+            <h1>PAZAAK</h1>
+        </div>
+        <div class="jogo">
+            <div class="info">
+                <p>Um jogo que remonta aos tempos da República Velha , era um popular jogo de cartas em que o objetivo
+                    era chegar mais perto de 20 sem ultrapassar. O jogador com a maior pontuação menor ou igual a 20
+                    venceu a rodada.</p>
+            </div>
+            <div class="atualizacao">
+                <span id="span_atualizacao">
+                    Aperte no botão de iniciar para começar
+                </span>
+            </div>
+            <div class="botao">
+                <button id="botao_iniciar" class="botao_inicia" onclick="iniciarJogo()">Iniciar</button>
+            </div>
+            <div class="containerJogo">
+                <div class="informacaoUsuario">
+                    <span>Você</span>
+                    <span>Pontos:</span>
+                    <span id="span_pontosUsuario">0</span>
+                </div>
+                <div class="painelJogo">
+                    <div class="ladoBot"></div>
+                    <div class="divisao"></div>
+                    <div class="ladoUsuario"></div>
+                </div>
+                <div class="informacaoBot">
+                    <span>Bot</span>
+                    <span>Pontos:</span>
+                    <span id="span_pontosBot">0</span>
+                </div>
+            </div>
+            <!-- <div class="teste">
+                <div class="teste" id="teste0"></div> <div class="teste" id="teste1"></div> <div class="teste" id="teste2"></div>
+            </div> -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="informacoes">
+                <p>Usuarios <br>
+                    cadastrados: <span id="qtd_usuarios">0</span></p> <br>
+                <p>Hora atual: <span id="horas_atual"></span></p>
+            </div>
+            <div class="direitos">
+                <p>Samuel Lima Ribeiro &copy; 2022 todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+                <div class="teste">
+                <div class="teste" id="teste0"></div> <div class="teste" id="teste1"></div> <div class="teste" id="teste2"></div>
+            </div>
+</body>
+</body>
+
+</html>
+
+<script>
+    let proximaAtualizacao;
+    window.onload = obterNumerosUsarios();
+    window.onload = obterHoraAtual();
+
+    // JOGO
+    const cartas_compradas = [
+        { valor: 1, imagem: "assets/cartas/neutro1.png" }, { valor: 2, imagem: "assets/cartas/neutro2.png" }, { valor: 3, imagem: "assets/cartas/neutro3.png" }, { valor: 4, imagem: "assets/cartas/neutro4.png" }, { valor: 5, imagem: "assets/cartas/neutro5.png" }, { valor: 6, imagem: "assets/cartas/neutro6.png" }, { valor: 7, imagem: "assets/cartas/neutro7.png" }, { valor: 8, imagem: "assets/cartas/neutro8.png" }, { valor: 9, imagem: "assets/cartas/neutro9.png" }, { valor: 10, imagem: "assets/cartas/neutro10.png" }
+    ]
+
+    const cartas_iniciadas = [
+        { valor: 1, imagem: "assets/cartas/+1.png", funcao: "carta_maisUm()" }, { valor: 2, imagem: "assets/cartas/+2.png", funcao: "carta_maisDois()" }, { valor: 3, imagem: "assets/cartas/+3.png", funcao: "carta_maisTres()" },
+        { valor: 4, imagem: "assets/cartas/+4.png", funcao: "carta_maisQuatro()" }, { valor: 5, imagem: "assets/cartas/+5.png", funcao: "carta_maisCinco()" }, { valor: -1, imagem: "assets/cartas/-1.png", funcao: "carta_menosUm()" }, { valor: -2, imagem: "assets/cartas/-2.png", funcao: "carta_menosDois()" }, { valor: -3, imagem: "assets/cartas/-3.png", funcao: "carta_menosTres()" }, { valor: -4, imagem: "assets/cartas/-4.png", funcao: "carta_menosQuatro()" }, { valor: -5, imagem: "assets/cartas/-5.png", funcao: "carta_menosCinco()" }
+    ]
+
+    const lista_div = [
+        teste0, teste1, teste2
+    ]
+
+    function iniciarJogo() {
+        botao_iniciar.style.display = "none"
+        span_atualizacao.innerHTML = "Sua vez"
+        span_atualizacao.style.color = "green"
+
+        for(var contador = 0; contador < 3; contador++) {
+            var numero_aleatorio = Math.floor(Math.random() * 10)
+            var imagem_carta = cartas_iniciadas[numero_aleatorio].imagem
+            var funcao_carta = cartas_iniciadas[numero_aleatorio].funcao
+            var div_carta = lista_div[contador]
+
+            div_carta.innerHTML = `<button class="teste" onclick="${funcao_carta}"><img src="${imagem_carta}" style="width: 100px;" alt=""> </button>`
+        }
+    }
+
+    function carta_maisUm() {
+
+    }
+</script>

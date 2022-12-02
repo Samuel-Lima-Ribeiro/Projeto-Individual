@@ -12,7 +12,7 @@
 
 .caixa-formulario {
   background-color: #181818;
-  padding: 90px 80px;
+  padding: 80px 80px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -61,7 +61,7 @@
 
 
 .caixa-formulario button {
-  margin: 30px 0 0 0;
+  margin: 50px 0 0 0;
   width: 180px;
   color: #f4f5ea;
   background-color: #484848;

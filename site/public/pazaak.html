@@ -44,33 +44,74 @@
                     venceu a rodada.</p>
             </div>
             <div class="atualizacao">
-                <span id="span_atualizacao">
-                    Aperte no botão de iniciar para começar
-                </span>
+                Vitoria: <span id="span_vitoria">0</span> || Empate: <span id="span_empate">0</span> || Derrota: <span
+                    id="span_derrota">0</span>
             </div>
             <div class="botao">
                 <button id="botao_iniciar" class="botao_inicia" onclick="iniciarJogo()">Iniciar</button>
+                <button style="display: none;" id="botao_comprar" class="botao_inicia"
+                    onclick="comprarCarta()">Comprar</button>
+                <button style="display: none;" id="botao_parar" class="botao_inicia"
+                    onclick="pararJogo()">Parar</button>
             </div>
-            <div class="containerJogo">
-                <div class="informacaoUsuario">
-                    <span>Você</span>
-                    <span>Pontos:</span>
-                    <span id="span_pontosUsuario">0</span>
+        </div>
+
+        <div class="containerJogo">
+            <div class="informacaoJogadores">
+                <div class="usuario" style="margin-right: 20px;">
+                    <div class="infoJogador">
+                        <span id="span_nomeUsuario"></span> | Pontos: <br> <span id="span_pontosUsuario"> 0 </span> <br>
+                        Status: <span id="span_statusUsuario">Em espera</span>
+                    </div>
+                    <div class="jogatina">
+                        <div class="columa">
+                            <img id="usuario_jogada1" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                            <img id="usuario_jogada2" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                            <img id="usuario_jogada3" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                        </div>
+                        <div class="columa">
+                            <img id="usuario_jogada4" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                            <img id="usuario_jogada5" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                            <img id="usuario_jogada6" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                        </div>
+                        <div class="columa">
+                            <img id="usuario_jogada7" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                            <img id="usuario_jogada8" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                            <img id="usuario_jogada9" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                        </div>
+                    </div>
+                    <div class="columa1" id="columaUsuario">
+                    </div>
                 </div>
-                <div class="painelJogo">
-                    <div class="ladoBot"></div>
-                    <div class="divisao"></div>
-                    <div class="ladoUsuario"></div>
-                </div>
-                <div class="informacaoBot">
-                    <span>Bot</span>
-                    <span>Pontos:</span>
-                    <span id="span_pontosBot">0</span>
+                <div class="usuario">
+                    <div class="infoBot">
+                        <span id="span_nomeBot">Bot</span> | Pontos: <br><span id="span_pontosBot"> 0 </span> <br>
+                        Status: <span id="span_statusBot">Em espera</span>
+                    </div>
+                    <div class="jogatina">
+                        <div class="columa">
+                            <img id="bot_jogada1" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                            <img id="bot_jogada2" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                            <img id="bot_jogada3" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                        </div>
+                        <div class="columa">
+                            <img id="bot_jogada4" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                            <img id="bot_jogada5" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                            <img id="bot_jogada6" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                        </div>
+                        <div class="columa">
+                            <img id="bot_jogada7" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                            <img id="bot_jogada8" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                            <img id="bot_jogada9" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                        </div>
+                    </div>
+                    <div class="columa1" id="columaBot">
+                        <img id="bot_compra1" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                        <img id="bot_compra2" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                        <img id="bot_compra3" src="assets/cartas/cartaVirada.png" style="width: 85px;">
+                    </div>
                 </div>
             </div>
-            <!-- <div class="teste">
-                <div class="teste" id="teste0"></div> <div class="teste" id="teste1"></div> <div class="teste" id="teste2"></div>
-            </div> -->
         </div>
     </main>
 
@@ -86,10 +127,6 @@
             </div>
         </div>
     </footer>
-                <div class="teste">
-                <div class="teste" id="teste0"></div> <div class="teste" id="teste1"></div> <div class="teste" id="teste2"></div>
-            </div>
-</body>
 </body>
 
 </html>
@@ -99,9 +136,11 @@
     window.onload = obterNumerosUsarios();
     window.onload = obterHoraAtual();
 
+
+    span_nomeUsuario.innerHTML = sessionStorage.NOME_USUARIO
     // JOGO
     const cartas_compradas = [
-        { valor: 1, imagem: "assets/cartas/neutro1.png" }, { valor: 2, imagem: "assets/cartas/neutro2.png" }, { valor: 3, imagem: "assets/cartas/neutro3.png" }, { valor: 4, imagem: "assets/cartas/neutro4.png" }, { valor: 5, imagem: "assets/cartas/neutro5.png" }, { valor: 6, imagem: "assets/cartas/neutro6.png" }, { valor: 7, imagem: "assets/cartas/neutro7.png" }, { valor: 8, imagem: "assets/cartas/neutro8.png" }, { valor: 9, imagem: "assets/cartas/neutro9.png" }, { valor: 10, imagem: "assets/cartas/neutro10.png" }
+        { valor: 2, imagem: "assets/cartas/neutro2.png" }, { valor: 2, imagem: "assets/cartas/neutro2.png" }, { valor: 3, imagem: "assets/cartas/neutro3.png" }, { valor: 4, imagem: "assets/cartas/neutro4.png" }, { valor: 5, imagem: "assets/cartas/neutro5.png" }, { valor: 6, imagem: "assets/cartas/neutro6.png" }, { valor: 7, imagem: "assets/cartas/neutro7.png" }, { valor: 8, imagem: "assets/cartas/neutro8.png" }, { valor: 9, imagem: "assets/cartas/neutro9.png" }, { valor: 10, imagem: "assets/cartas/neutro10.png" }
     ]
 
     const cartas_iniciadas = [
@@ -109,26 +148,272 @@
         { valor: 4, imagem: "assets/cartas/+4.png", funcao: "carta_maisQuatro()" }, { valor: 5, imagem: "assets/cartas/+5.png", funcao: "carta_maisCinco()" }, { valor: -1, imagem: "assets/cartas/-1.png", funcao: "carta_menosUm()" }, { valor: -2, imagem: "assets/cartas/-2.png", funcao: "carta_menosDois()" }, { valor: -3, imagem: "assets/cartas/-3.png", funcao: "carta_menosTres()" }, { valor: -4, imagem: "assets/cartas/-4.png", funcao: "carta_menosQuatro()" }, { valor: -5, imagem: "assets/cartas/-5.png", funcao: "carta_menosCinco()" }
     ]
 
-    const lista_div = [
-        teste0, teste1, teste2
-    ]
+    const div_jogadas = [{ usuario: usuario_jogada1, Bott: bot_jogada1 }, { usuario: usuario_jogada2, Bott: bot_jogada2 }, { usuario: usuario_jogada3, Bott: bot_jogada3 }, { usuario: usuario_jogada4, Bott: bot_jogada4 }, { usuario: usuario_jogada5, Bott: bot_jogada5 }, { usuario: usuario_jogada6, Bott: bot_jogada6 }, { usuario: usuario_jogada7, Bott: bot_jogada7 }, { usuario: usuario_jogada8, Bott: bot_jogada8 }, { usuario: usuario_jogada9, Bott: bot_jogada9 }]
+
+
+
+    var jogadaUsuario = 0
+    var jogadaBot = 0
+
+    var pontosBot = 0
+    var pontosUsuario = 0
+
+    var jogadorParou = false
+    var botParou = false
+
+    var vezJogador = true
+    var vezBot = false
+
+    // FUNCAO PRA VERIFICAR SE OS DOIS PARARAM AI EU DO O RESULTADO GANHOU PERDUE E PAH
 
     function iniciarJogo() {
         botao_iniciar.style.display = "none"
-        span_atualizacao.innerHTML = "Sua vez"
-        span_atualizacao.style.color = "green"
 
-        for(var contador = 0; contador < 3; contador++) {
+        columaUsuario.style.display = "block"
+        columaBot.style.display = "block"
+
+        botao_comprar.style.display = "block"
+        botao_parar.style.display = "block"
+
+        span_statusUsuario.innerHTML = "Sua vez"
+        span_statusUsuario.style.color = "green"
+        span_statusBot.innerHTML = "Em espera"
+
+        span_pontosUsuario.innerHTML = 0
+        span_pontosBot.innerHTML = 0
+
+        for (var contador = 0; contador < 3; contador++) {
             var numero_aleatorio = Math.floor(Math.random() * 10)
             var imagem_carta = cartas_iniciadas[numero_aleatorio].imagem
             var funcao_carta = cartas_iniciadas[numero_aleatorio].funcao
-            var div_carta = lista_div[contador]
 
-            div_carta.innerHTML = `<button class="teste" onclick="${funcao_carta}"><img src="${imagem_carta}" style="width: 100px;" alt=""> </button>`
+            columaUsuario.innerHTML += `<button onclick="teste()"><img src="${imagem_carta}" style="width: 85px;" alt=""> </button>`
         }
     }
 
-    function carta_maisUm() {
+    function comprarCarta() {
+
+
+
+        // nao parei entao posso comprar
+        if (!jogadorParou && vezJogador) {
+            jogadaUsuario += 1
+            var div_jogada = div_jogadas[jogadaUsuario - 1].usuario
+            var numero_aleatorio = Math.floor(Math.random() * 10)
+            pontosUsuario += cartas_compradas[numero_aleatorio].valor
+
+            div_jogada.src = cartas_compradas[numero_aleatorio].imagem
+            span_pontosUsuario.innerHTML = pontosUsuario
+            if (!botParou) {
+                // falta funcoes para chamar o update no banco
+                // funcoes para chamar o bot
+                if (pontosUsuario > 20) {
+                    span_statusUsuario.innerHTML = "Perdeu"
+                    span_statusUsuario.style.color = "red"
+
+                    var derrota = Number(span_derrota.value)
+
+                    span_derrota.innerHTML = derrota + 1
+
+                    jogadorParou = true
+
+                    //funcao perdeu
+
+                } else if (pontosUsuario == 20) {
+                    span_statusUsuario.innerHTML = "Aguardando"
+                    span_statusUsuario.style.color = "yellow"
+
+                    jogadorParou = true
+
+                    span_statusBot.innerHTML = "Jogando"
+                    setTimeout(() => comprarCartaBot(), 1000)
+                } else if (pontosUsuario < 20) {
+                    span_statusUsuario.innerHTML = "Aguardando"
+                    span_statusUsuario.style.color = "black"
+
+                    vezJogador = false
+
+                    setTimeout(() => comprarCartaBot(), 1000)
+                }
+            }
+            //  vezJogador // funcoes sem chamar o bot
+            else {
+                if (pontosUsuario > 20) {
+                    span_statusUsuario.innerHTML = "Perdeu"
+                    span_statusUsuario.style.color = "red"
+                    span_statusBot.innerHTML = "Ganhou"
+                    span_statusBot.style.color = "green"
+
+                    var derrota = Number(span_derrota.value)
+
+                    span_derrota.innerHTML = derrota + 1
+
+                    jogadorParou = true
+
+                    //funcao perdeu
+                } else if (pontosUsuario == 20 && pontosBot == 20) {
+                    span_statusUsuario.innerHTML = "Empate"
+                    span_statusUsuario.style.color = "black"
+                    span_statusBot.innerHTML = "Empate"
+                    span_statusBot.style.color = "black"
+
+                    var empate = Number(span_empate.value)
+
+                    span_empate.innerHTML = empate + 1
+
+                    //funcao empate
+
+                    jogadorParou = true
+                } else if (pontosUsuario == 20) {
+                    span_statusUsuario.innerHTML = "Ganhou"
+                    span_statusUsuario.style.color = "black"
+                    span_statusBot.innerHTML = "Perdeu"
+                    span_statusBot.style.color = "red"
+
+                    var vitoria = Number(span_vitoria.value)
+
+                    span_vitoria.innerHTML = vitoria + 1
+
+                    jogadorParou = true
+
+                    //funcao vitoria
+                }
+            }
+        }
+    }
+
+    function comprarCartaBot() {
+
+        // VERIFICOU SE ELE PAROU, CASO SIM, CHAMO O BOT DNV, FAÇO ISSO SO NO FINAL
+        // CASO CONTRARIO N ME CHAMO
+        // NO FINAL EU VEJO OQ O BOT FAZ, PARA OU
+
+        if (!botParou) {
+            jogadaBot += 1
+            var div_jogada = div_jogadas[jogadaBot - 1].Bott
+
+            var numero_aleatorio = Math.floor(Math.random() * 10)
+
+            pontosBot += numero_aleatorio
+
+            div_jogada.src = cartas_compradas[numero_aleatorio].imagem
+            span_pontosBot.innerHTML = pontosBot
+
+            // jogador parou, chamo eu mesmo e ja posso fazer o update
+            if (jogadorParou) {
+                if (pontosBot > 20) {
+                    span_statusBot.innerHTML = "Perdeu"
+                    span_statusBot.style.color = "red"
+                    span_statusUsuario.innerHTML = "Ganhou"
+                    span_statusUsuario.style.color = "green"
+
+                    var vitoria = Number(span_vitoria.value)
+
+                    span_vitoria.innerHTML = vitoria + 1
+
+                    //funcao vitoria
+                } else if (pontosBot == 20 && pontosUsuario == 20) {
+                    span_statusUsuario.innerHTML = "Empate"
+                    span_statusUsuario.style.color = "black"
+                    span_statusBot.innerHTML = "Empate"
+                    span_statusBot.style.color = "black"
+
+                    var empate = Number(span_empate.value)
+
+                    span_empate.innerHTML = empate + 1
+
+                    //funcao empate
+                } else if (pontosBot == 20) {
+                    span_statusUsuario.innerHTML = "Perdeu"
+                    span_statusUsuario.style.color = "red"
+                    span_statusBot.innerHTML = "Ganhou"
+                    span_statusBot.style.color = "green"
+
+                    var derrota = Number(span_derrota.value)
+
+                    span_derrota.innerHTML = derrota + 1
+
+                    //funcao perdeu
+                } else if (pontosBot > pontosUsuario) {
+                    span_statusUsuario.innerHTML = "Perdeu"
+                    span_statusUsuario.style.color = "red"
+                    span_statusBot.innerHTML = "Ganhou"
+                    span_statusBot.style.color = "green"
+
+                    var derrota = Number(span_derrota.value)
+
+                    span_derrota.innerHTML = derrota + 1
+
+                    //funcao perdeu
+                } else if (pontosBot < pontosUsuario) {
+                    setTimeout(() => comprarCartaBot(), 1000)
+                }
+            }
+            // se jogador n parou, n chamo ninguem 
+            else {
+
+                if(pontosBot > 20) {
+                span_statusBot.innerHTML = "Perdeu"
+                span_statusBot.style.color = "red"
+                span_statusUsuario.innerHTML = "Ganhou"
+                span_statusUsuario.style.color = "green"
+
+                var vitoria = Number(span_vitoria.value)
+
+                span_vitoria.innerHTML = vitoria + 1
+
+                botParou = true
+                //funcao vitoria
+                } else if(pontosBot == 20) {
+                span_statusBot.innerHTML = "Parou"
+                span_statusBot.style.color = "black"
+                span_statusUsuario.innerHTML = "Sua vez"
+                span_statusUsuario.style.color = "green"
+
+                botParou = true
+                vezJogador = true
+                } else if(pontosBot >= 17 ) {
+                    botParou = true
+
+                    vezJogador = true
+                    span_statusBot.innerHTML = "Parou"
+                span_statusBot.style.color = "black"
+                span_statusUsuario.innerHTML = "Sua vez"
+                span_statusUsuario.style.color = "green"
+                } else {
+                    vezJogador = true
+                }
+            }
+        }
+
 
     }
+
+    function pararJogo() {
+        jogadorParou = true
+
+        if (botParou) {
+
+            // VERIFICO OS NUMEROS
+            if (pontosBot == pontosUsuario) {
+                alert("empatou")
+
+                // FUNCAO DE EMPATE
+            } else if (pontosUsuario > pontosBot) {
+                alert("ganhou")
+
+                // FUNÇÃO DE GANHAR DA REFRASH QUANDO ATUALIZAR
+            } else if (pontosBot > pontosUsuario) {
+                alert("perdeu")
+            }
+
+        } else {
+
+            setTimeout(() => comprarCartaBot(), 1000)
+        }
+    }
+
+    // BOT TA COMPRANDO MESMO TENDO MAIS
+    // ARRUMAR OS DADOS Q APARECEM NO STATUS
+    // da um SELECT EM VITORIA E DE DERROTA E FAZ A BOA
 </script>

@@ -1,62 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/estilos-gerais.css">
-    <link rel="stylesheet" href="css/personagem.css">
-    <script src="js/funcoes.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personagens</title>
+  <link rel="stylesheet" href="css/estilos-gerais.css">
+  <link rel="stylesheet" href="css/personagem.css">
+  <script src="js/funcoes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-      <!--HEADER-->
+  <!--HEADER-->
   <header>
     <div class="container">
-        <div class="titulo">
-          <h1>STAR WARS</h1>
-        </div>
-  
-        <div class="navegacao">
-          <ul>
-            <li><a href="indexUsuario.html">Perfil</a></li>
-            <li>|</li>
-            <li class="agora"><a href="personagem.html">Personagem</a></li>
-            <li>|</li>
-            <li><a href="pazaak.html">Parzaak</a></li>
-            <li>|</li>
-            <li onclick="limparSessao()"><a href="login.html">Sair</a></li>
-          </ul>
-        </div>
+      <div class="titulo">
+        <h1>STAR WARS</h1>
       </div>
+
+      <div class="navegacao">
+        <ul>
+          <li class="agora"><a href="personagem.html">Personagem</a></li>
+          <li>|</li>
+          <li><a href="pazaak.html">Pazaak</a></li>
+          <li>|</li>
+          <li onclick="limparSessao()"><a href="login.html">Sair</a></li>
+        </ul>
+      </div>
+    </div>
   </header>
 
   <main>
 
     <div class="bannerPersonagem">
-        <h1 class="nomePersonagem">Yoda</h1>
-        <div class="infoPersonagem">
-            <div class="descPersonagem">
-                <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de tudo. O maior professor, o fracasso é..</p>
-            </div>
-                <img class="imgYodaTela">
+      <h1 class="nomePersonagem">Yoda</h1>
+      <div class="infoPersonagem">
+        <div class="descPersonagem">
+          <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de
+            tudo. O maior professor, o fracasso é..</p>
         </div>
-        <div class="frase">
-            <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de tudo. O maior professor, o fracasso é "</h2>
-        </div>
+        <img class="imgYodaTela">
+      </div>
+      <div class="frase">
+        <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
+          de tudo. O maior professor, o fracasso é "</h2>
+      </div>
     </div>
 
     <div class="bannerPersonagem">
-        <h1 class="nomePersonagem">Luke</h1>
-        <div class="infoPersonagem">
-            <div class="descPersonagem">
-                <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de tudo. O maior professor, o fracasso é..</p>
-            </div>
-                <img class="imglukeTela">
+      <h1 class="nomePersonagem">Luke Skywalker</h1>
+      <div class="infoPersonagem">
+        <div class="descPersonagem">
+          <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de
+            tudo. O maior professor, o fracasso é..</p>
         </div>
-        <div class="frase">
-            <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de tudo. O maior professor, o fracasso é "</h2>
+        <img class="imglukeTela">
+      </div>
+      <div class="frase">
+        <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
+          de tudo. O maior professor, o fracasso é "</h2>
+      </div>
+    </div>
+
+    <div class="bannerPersonagem">
+      <h1 class="nomePersonagem">Darth Vader</h1>
+      <div class="infoPersonagem">
+        <div class="descPersonagem">
+          <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de
+            tudo. O maior professor, o fracasso é..</p>
         </div>
+        <img class="imglukeTela">
+      </div>
+      <div class="frase">
+        <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
+          de tudo. O maior professor, o fracasso é "</h2>
+      </div>
+    </div>
+
+    <div class="bannerPersonagem">
+      <h1 class="nomePersonagem">Leia Organa</h1>
+      <div class="infoPersonagem">
+        <div class="descPersonagem">
+          <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de
+            tudo. O maior professor, o fracasso é..</p>
+        </div>
+        <img class="imglukeTela">
+      </div>
+      <div class="frase">
+        <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
+          de tudo. O maior professor, o fracasso é "</h2>
+      </div>
+    </div>
+
+    <div class="bannerPersonagem">
+      <h1 class="nomePersonagem">Obi-Wan Kenobi</h1>
+      <div class="infoPersonagem">
+        <div class="descPersonagem">
+          <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de
+            tudo. O maior professor, o fracasso é..</p>
+        </div>
+        <img class="imglukeTela">
+      </div>
+      <div class="frase">
+        <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
+          de tudo. O maior professor, o fracasso é "</h2>
+      </div>
+    </div>
+
+    <div class="bannerPersonagem">
+      <h1 class="nomePersonagem">Han Solo</h1>
+      <div class="infoPersonagem">
+        <div class="descPersonagem">
+          <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de
+            tudo. O maior professor, o fracasso é..</p>
+        </div>
+        <img class="imglukeTela">
+      </div>
+      <div class="frase">
+        <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
+          de tudo. O maior professor, o fracasso é "</h2>
+      </div>
+    </div>
+
+    <div class="bannerPersonagem">
+      <h1 class="nomePersonagem">Palpatine</h1>
+      <div class="infoPersonagem">
+        <div class="descPersonagem">
+          <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de
+            tudo. O maior professor, o fracasso é..</p>
+        </div>
+        <img class="imglukeTela">
+      </div>
+      <div class="frase">
+        <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
+          de tudo. O maior professor, o fracasso é "</h2>
+      </div>
+    </div>
+
+    <div id="divVoto" class="Voto">
+      <h1 class="nomePersonagem">Vote no seu personagem favorito!</h1>
+      <div class="botoes">
+        <button onclick="votarYoda()">Yoda</button> <button onclick="votarLuke()">Luke</button> <button
+          onclick="votarVader()">Darth Vader</button> <button onclick="votarLeia()">Leia</button>
+      </div>
+      <div class="botoes1">
+        <button onclick="votarKenobi()">Obi-Wan</button> <button onclick="votarSolo()">Han Solo</button> <button
+          onclick="votarPalpatine()">Palpatine</button>
+      </div>
+    </div>
+
+    <div class="graficoVoto" id="grafico">
+      <canvas id="graficoPersonagem"></canvas>
     </div>
 
   </main>
@@ -74,11 +170,160 @@
     </div>
   </footer>
 </body>
+
 </html>
 
 <script>
-    let proximaAtualizacao;
-    window.onload = obterNumerosUsarios();
-    window.onload = obterHoraAtual();
+  let proximaAtualizacao;
+  window.onload = obterNumerosUsarios();
+  window.onload = obterHoraAtual();
+
+  Chart.defaults.color = "white";
+  chart.defaults.fontSize = "32px"
+
+  var personagemEscolhido = 0
+
+
+  function votarYoda() {
+    personagemEscolhido = 1
+    votar()
+  }
+
+  function votarLuke() {
+    personagemEscolhido = 2
+    votar()
+  }
+
+  function votarVader() {
+    personagemEscolhido = 3
+    votar()
+  }
+
+  function votarLeia() {
+    personagemEscolhido = 4
+    votar()
+  }
+
+  function votarKenobi() {
+    personagemEscolhido = 5
+    votar()
+  }
+
+  function votarSolo() {
+    personagemEscolhido = 6
+    votar()
+  }
+
+  function votarPalpatine() {
+    personagemEscolhido = 7
+    votar()
+  }
+
+  // FUNCAO VOTAR PERSONAGEM
+  function votar() {
+    fetch(`/avisos/votar/${sessionStorage.getItem("ID_USUARIO")}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        personagem: personagemEscolhido
+      })
+    }).then(function (resposta) {
+
+      if (resposta.ok) {
+        obterVotos()
+      } else if (resposta.status == 404) {
+        window.alert("Deu 404!");
+      } else {
+        throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+      }
+    }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+  }
+
+  // FUNCAO PLOTAR GRAFICO
+  function obterVotos(idAquario) {
+
+    if (proximaAtualizacao != undefined) {
+      clearTimeout(proximaAtualizacao);
+    }
+
+    fetch(`/medidas/grafico/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+
+          plotarGraficoVoto(resposta, idAquario);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+
+  // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+  // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+  // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+  function plotarGraficoVoto(resposta, idAquario) {
+
+    console.log('iniciando plotagem do gráfico...');
+
+    // Criando estrutura para plotar gráfico - labels
+    let labels = [];
+
+    // Criando estrutura para plotar gráfico - dados
+    let dados = {
+      labels: labels,
+      datasets: [{
+        label: 'Votos',
+        data: [],
+        fill: false,
+        tension: 0.1,
+        borderColor: 'gray',
+        backgroundColor: 'gray', 
+      }]
+    };
+
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      labels.push(registro.personagem);
+      dados.datasets[0].data.push(registro.votos);
+    }
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+      type: 'bar',
+      data: dados,
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 22
+              }
+            }
+          }
+        }
+      }
+    };
+
+    // Adicionando gráfico criado em div na tela
+    let myChart = new Chart(
+      document.getElementById(`graficoPersonagem`),
+      config
+    );
+
+    grafico.style.display = "block"
+    divVoto.style.display = "none"
+  }
+
 
 </script>

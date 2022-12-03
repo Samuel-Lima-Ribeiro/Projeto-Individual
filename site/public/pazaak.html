@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pazaak</title>
     <link rel="stylesheet" href="css/estilos-gerais.css">
     <link rel="stylesheet" href="css/pazaak.css">
     <script src="js/funcoes.js"></script>
@@ -21,11 +21,9 @@
 
             <div class="navegacao">
                 <ul>
-                    <li><a href="indexUsuario.html">Perfil</a></li>
-                    <li>|</li>
                     <li><a href="personagem.html">Personagem</a></li>
                     <li>|</li>
-                    <li class="agora"><a href="pazaak.html">Parzaak</a></li>
+                    <li class="agora"><a href="pazaak.html">Pazaak</a></li>
                     <li>|</li>
                     <li onclick="limparSessao()"><a href="login.html">Sair</a></li>
                 </ul>
@@ -44,8 +42,8 @@
                     venceu a rodada.</p>
             </div>
             <div class="atualizacao">
-                Vitoria: <span id="span_vitoria">0</span> || Empate: <span id="span_empate">0</span> || Derrota: <span
-                    id="span_derrota">0</span>
+                Vitória: <span style="color: green;" id="span_vitoria">0</span> || Empates: <span style="color: yellow;" id="span_empate">0</span> || Derrotas: <span
+                  style="color: red;"  id="span_derrota">0</span>
             </div>
             <div class="botao">
                 <button id="botao_iniciar" class="botao_inicia" onclick="iniciarJogo()">Iniciar</button>
@@ -113,6 +111,13 @@
                 </div>
             </div>
         </div>
+        
+        <div class="tituloJogo">
+            <h1>Ranking</h1>
+        </div>
+
+        <div style="margin: 20px 30px;" class="atualizacao" id="ranking">
+        </div>
     </main>
 
     <footer>
@@ -135,6 +140,7 @@
     let proximaAtualizacao;
     window.onload = obterNumerosUsarios();
     window.onload = obterHoraAtual();
+    window.onload = obterRanking();
 
 
     span_nomeUsuario.innerHTML = sessionStorage.NOME_USUARIO
@@ -179,7 +185,7 @@
     var divCartaComprada = ""
     var imagemCarta = ""
 
-    // FUNCAO PRA VERIFICAR SE OS DOIS PARARAM AI EU DO O RESULTADO GANHOU PERDUE E PAH
+    // FUNCAO PRA VERIFICAR SE OS DOIS PARARAM AI EU DO O RESULTO
 
     function iniciarJogo() {
         cadastrarJogo()
@@ -257,7 +263,6 @@
                 div_jogada.src = cartas_compradas[numero_aleatorio].imagem
                 span_pontosUsuario.innerHTML = pontosUsuario
                 if (!botParou) {
-                    // falta funcoes para chamar o update no banco
                     // funcoes para chamar o bot
                     if (pontosUsuario > 20) {
                         span_statusUsuario.innerHTML = "Perdeu"
@@ -273,13 +278,13 @@
                         jogadorParou = true
 
                         span_statusBot.innerHTML = "Jogando"
-                        span_statusBot.style.color = "black"
+                        span_statusBot.style.color = "green"
                         setTimeout(() => comprarCartaBot(), 1000)
                     } else if (pontosUsuario < 20) {
                         span_statusUsuario.innerHTML = "Em espera"
-                        span_statusUsuario.style.color = "black"
+                        span_statusUsuario.style.color = "white"
                         span_statusBot.innerHTML = "Jogando"
-                        span_statusBot.style.green = "black"
+                        span_statusBot.style.color = "green"
 
                         vezJogador = false
 
@@ -320,7 +325,7 @@
 
     function comprarCartaBot() {
 
-        // VERIFICOU SE ELE PAROU, CASO SIM, CHAMO O BOT DNV, FAÇO ISSO SO NO FINAL
+        // VERIFICOU SE ELE PAROU, CASO SIM, CHAMO O BOT DNV
         // CASO CONTRARIO N ME CHAMO
         // NO FINAL EU VEJO OQ O BOT FAZ, PARA OU
 
@@ -388,7 +393,7 @@
                     setTimeout(() => empate(), 1000)
                 } else if (pontosBot <= pontosUsuario) {
                     span_statusBot.innerHTML = "Jogando"
-                    span_statusBot.style.color = "black"
+                    span_statusBot.style.color = "green"
                     setTimeout(() => comprarCartaBot(), 1000)
                 }
             }
@@ -421,7 +426,7 @@
                     span_statusUsuario.style.color = "green"
                 } else {
                     span_statusBot.innerHTML = "Em espera"
-                    span_statusBot.style.color = "black"
+                    span_statusBot.style.color = "white"
                     span_statusUsuario.innerHTML = "Sua vez"
                     span_statusUsuario.style.color = "green"
                     vezJogador = true
@@ -622,11 +627,6 @@
         comprarCarta()
     }
 
-    // BOT TA COMPRANDO MESMO TENDO MAIS
-    // ARRUMAR OS DADOS Q APARECEM NO STATUS
-    // da um SELECT EM VITORIA E DE DERROTA E FAZ A BOA
-
-
     // FUNCOES PARA ATUALIZAR VITORIA, EMPATE, DERROTA
     function vitoria() {
         sessionStorage.VITORIA_USUARIO = Number(sessionStorage.VITORIA_USUARIO) + 1
@@ -702,4 +702,42 @@
             console.log(`#ERRO: ${resposta}`);
         });
     }
+
+    //FUNCAO RANKING
+function obterRanking(idSensor) {
+
+    if (proximaAtualizacao != undefined) {
+        clearTimeout(proximaAtualizacao);
+    }
+    
+    fetch(`/medidas/ranking/${idSensor}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+    
+                plotarRanking(resposta);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+    }
+    
+    function plotarRanking(resposta, idSensor) {
+    var contador = 1
+          for (i = 0; i < resposta.length; i++) {
+              var registro = resposta[i];
+              var usuario = registro.usuario
+              var vitoria = registro.vitoria
+              var empate = registro.empate
+              var derrota = registro.derrota
+
+              ranking.innerHTML += `#${contador} || ${usuario} || Vitórias: <span style="color: green;"> ${vitoria} </span> || Empates: <span style="color: yellow;"> ${empate} </span> || Derrotas: <span style="color: red;"> ${derrota} </span> <br> <br>`
+              contador += 1
+          }  
+      }
 </script>

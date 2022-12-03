@@ -173,6 +173,28 @@ function derrota(req, res) {
 
 }
 
+// VOTAR
+
+function votar(req, res) {
+    var personagem = req.body.personagem;
+    var idUsuario = req.params.idAviso;
+
+    avisoModel.votar(personagem, idUsuario)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+}
+
 module.exports = {
     testar,
     listar,
@@ -182,5 +204,6 @@ module.exports = {
     deletar,
     vitoria,
     empate,
-    derrota
+    derrota,
+    votar
 }

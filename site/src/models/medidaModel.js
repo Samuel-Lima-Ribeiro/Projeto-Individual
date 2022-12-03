@@ -24,6 +24,54 @@ function qtdUsuarios(idAquario, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
+function grafico(idAquario, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select top ${limite_linhas}
+        dht11_temperatura as temperatura, 
+        dht11_umidade as umidade,  
+                        momento,
+                        FORMAT(momento, 'HH:mm:ss') as momento_grafico
+                    from medida
+                    where fk_aquario = ${idAquario}
+                    order by id desc`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select count(*) as votos, p.nome as personagem from usuario u join personagem p on p.idpersonagem = u.fkpersonagem  group by u.fkpersonagem order by votos;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarRanking(idAquario, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select top ${limite_linhas}
+        dht11_temperatura as temperatura, 
+        dht11_umidade as umidade,  
+                        momento,
+                        FORMAT(momento, 'HH:mm:ss') as momento_grafico
+                    from medida
+                    where fk_aquario = ${idAquario}
+                    order by id desc`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select nome as usuario, vitoria, empate, derrota from jogo join usuario on usuario.idusuario = jogo.fkusuario where vitoria > 0 or empate > 0 or derrota > 0 order by vitoria;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function buscaHoraAtual(idAquario, limite_linhas) {
 
     instrucaoSql = ''
@@ -103,5 +151,7 @@ module.exports = {
     qtdUsuarios,
     buscaHoraAtual,
     buscarUltimaHoraAtual,
-    buscarData
+    buscarData,
+    buscarRanking,
+    grafico
 }

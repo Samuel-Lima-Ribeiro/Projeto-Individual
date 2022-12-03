@@ -40,4 +40,9 @@ router.put("/derrota/:idAviso", function (req, res) {
     avisoController.derrota(req, res);
 });
 
+// FUNCAO VOTAR
+router.put("/votar/:idAviso", function (req, res) {
+    avisoController.votar(req, res);
+});
+
 module.exports = router;

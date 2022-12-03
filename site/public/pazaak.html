@@ -23,7 +23,7 @@
                 <ul>
                     <li><a href="indexUsuario.html">Perfil</a></li>
                     <li>|</li>
-                    <li><a href="personagem.html">Universo</a></li>
+                    <li><a href="personagem.html">Personagem</a></li>
                     <li>|</li>
                     <li class="agora"><a href="pazaak.html">Parzaak</a></li>
                     <li>|</li>
@@ -34,7 +34,7 @@
     </header>
 
     <main>
-        <div class="titulo">
+        <div class="tituloJogo">
             <h1>PAZAAK</h1>
         </div>
         <div class="jogo">
@@ -138,6 +138,10 @@
 
 
     span_nomeUsuario.innerHTML = sessionStorage.NOME_USUARIO
+    span_vitoria.innerHTML = sessionStorage.VITORIA_USUARIO
+    span_empate.innerHTML = sessionStorage.EMPATE_USUARIO
+    span_derrota.innerHTML = sessionStorage.DERROTA_USUARIO
+
     // JOGO
     const cartas_compradas = [
         { valor: 2, imagem: "assets/cartas/neutro2.png" }, { valor: 2, imagem: "assets/cartas/neutro2.png" }, { valor: 3, imagem: "assets/cartas/neutro3.png" }, { valor: 4, imagem: "assets/cartas/neutro4.png" }, { valor: 5, imagem: "assets/cartas/neutro5.png" }, { valor: 6, imagem: "assets/cartas/neutro6.png" }, { valor: 7, imagem: "assets/cartas/neutro7.png" }, { valor: 8, imagem: "assets/cartas/neutro8.png" }, { valor: 9, imagem: "assets/cartas/neutro9.png" }, { valor: 10, imagem: "assets/cartas/neutro10.png" }
@@ -151,6 +155,7 @@
     const div_jogadas = [{ usuario: usuario_jogada1, Bott: bot_jogada1 }, { usuario: usuario_jogada2, Bott: bot_jogada2 }, { usuario: usuario_jogada3, Bott: bot_jogada3 }, { usuario: usuario_jogada4, Bott: bot_jogada4 }, { usuario: usuario_jogada5, Bott: bot_jogada5 }, { usuario: usuario_jogada6, Bott: bot_jogada6 }, { usuario: usuario_jogada7, Bott: bot_jogada7 }, { usuario: usuario_jogada8, Bott: bot_jogada8 }, { usuario: usuario_jogada9, Bott: bot_jogada9 }]
 
 
+    var lista_compras = []
 
     var jogadaUsuario = 0
     var jogadaBot = 0
@@ -164,9 +169,20 @@
     var vezJogador = true
     var vezBot = false
 
+    var travarValidacao = false
+
+
+    // dados para cartas compradas
+    var cartaJogadaComprada = false
+    var valorCartaJogada = 0
+    var posicaoCarta = 0
+    var divCartaComprada = ""
+    var imagemCarta = ""
+
     // FUNCAO PRA VERIFICAR SE OS DOIS PARARAM AI EU DO O RESULTADO GANHOU PERDUE E PAH
 
     function iniciarJogo() {
+        cadastrarJogo()
         botao_iniciar.style.display = "none"
 
         columaUsuario.style.display = "block"
@@ -187,96 +203,116 @@
             var imagem_carta = cartas_iniciadas[numero_aleatorio].imagem
             var funcao_carta = cartas_iniciadas[numero_aleatorio].funcao
 
-            columaUsuario.innerHTML += `<button onclick="teste()"><img src="${imagem_carta}" style="width: 85px;" alt=""> </button>`
+            var botaoCompra = `<button onclick="${funcao_carta}"><img src="${imagem_carta}" style="width: 85px;" alt=""> </button>`
+
+            var jsonCarta = {
+                imagem: botaoCompra,
+                funcao: funcao_carta,
+                imagem: imagem_carta
+            }
+
+            lista_compras.push(jsonCarta)
+
+            columaUsuario.innerHTML += `<button onclick="${funcao_carta}"><img src="${imagem_carta}" style="width: 85px;" alt=""> </button>`
         }
     }
 
     function comprarCarta() {
 
-
-
-        // nao parei entao posso comprar
-        if (!jogadorParou && vezJogador) {
+        // carta comprada
+        if (cartaJogadaComprada) {
             jogadaUsuario += 1
+
             var div_jogada = div_jogadas[jogadaUsuario - 1].usuario
-            var numero_aleatorio = Math.floor(Math.random() * 10)
-            pontosUsuario += cartas_compradas[numero_aleatorio].valor
 
-            div_jogada.src = cartas_compradas[numero_aleatorio].imagem
+            var numero_aleatorio = valorCartaJogada
+            pontosUsuario += valorCartaJogada
+
+
+            div_jogada.src = imagemCarta
             span_pontosUsuario.innerHTML = pontosUsuario
-            if (!botParou) {
-                // falta funcoes para chamar o update no banco
-                // funcoes para chamar o bot
-                if (pontosUsuario > 20) {
-                    span_statusUsuario.innerHTML = "Perdeu"
-                    span_statusUsuario.style.color = "red"
 
-                    var derrota = Number(span_derrota.value)
+            lista_compras[posicaoCarta].imagem = "assets/cartas/cartaVirada.png"
+            lista_compras[posicaoCarta].funcao = ""
 
-                    span_derrota.innerHTML = derrota + 1
+            columaUsuario.innerHTML = ""
+            for (var contador = 0; contador < lista_compras.length; contador++) {
+                var cartaComprada = lista_compras[contador].imagem
+                var funcao_carta = lista_compras[contador].funcao
 
-                    jogadorParou = true
-
-                    //funcao perdeu
-
-                } else if (pontosUsuario == 20) {
-                    span_statusUsuario.innerHTML = "Aguardando"
-                    span_statusUsuario.style.color = "yellow"
-
-                    jogadorParou = true
-
-                    span_statusBot.innerHTML = "Jogando"
-                    setTimeout(() => comprarCartaBot(), 1000)
-                } else if (pontosUsuario < 20) {
-                    span_statusUsuario.innerHTML = "Aguardando"
-                    span_statusUsuario.style.color = "black"
-
-                    vezJogador = false
-
-                    setTimeout(() => comprarCartaBot(), 1000)
-                }
+                columaUsuario.innerHTML += `<button onclick="${funcao_carta}"><img src="${cartaComprada}" style="width: 85px;" alt=""> </button>`
             }
-            //  vezJogador // funcoes sem chamar o bot
-            else {
-                if (pontosUsuario > 20) {
-                    span_statusUsuario.innerHTML = "Perdeu"
-                    span_statusUsuario.style.color = "red"
-                    span_statusBot.innerHTML = "Ganhou"
-                    span_statusBot.style.color = "green"
 
-                    var derrota = Number(span_derrota.value)
+            cartaJogadaComprada = false
+            valorCartaJogada = 0
+            imagemCarta = ""
+        } else {
+            // nao parei entao posso comprar
+            if (!jogadorParou && vezJogador) {
+                jogadaUsuario += 1
+                var div_jogada = div_jogadas[jogadaUsuario - 1].usuario
+                var numero_aleatorio = Math.floor(Math.random() * 10)
+                pontosUsuario += cartas_compradas[numero_aleatorio].valor
 
-                    span_derrota.innerHTML = derrota + 1
+                div_jogada.src = cartas_compradas[numero_aleatorio].imagem
+                span_pontosUsuario.innerHTML = pontosUsuario
+                if (!botParou) {
+                    // falta funcoes para chamar o update no banco
+                    // funcoes para chamar o bot
+                    if (pontosUsuario > 20) {
+                        span_statusUsuario.innerHTML = "Perdeu"
+                        span_statusUsuario.style.color = "red"
+                        span_statusBot.innerHTML = "Ganhou"
+                        span_statusBot.style.color = "green"
 
-                    jogadorParou = true
+                        setTimeout(() => derrota(), 1000)
+                    } else if (pontosUsuario == 20) {
+                        span_statusUsuario.innerHTML = "Parou"
+                        span_statusUsuario.style.color = "yellow"
 
-                    //funcao perdeu
-                } else if (pontosUsuario == 20 && pontosBot == 20) {
-                    span_statusUsuario.innerHTML = "Empate"
-                    span_statusUsuario.style.color = "black"
-                    span_statusBot.innerHTML = "Empate"
-                    span_statusBot.style.color = "black"
+                        jogadorParou = true
 
-                    var empate = Number(span_empate.value)
+                        span_statusBot.innerHTML = "Jogando"
+                        span_statusBot.style.color = "black"
+                        setTimeout(() => comprarCartaBot(), 1000)
+                    } else if (pontosUsuario < 20) {
+                        span_statusUsuario.innerHTML = "Em espera"
+                        span_statusUsuario.style.color = "black"
+                        span_statusBot.innerHTML = "Jogando"
+                        span_statusBot.style.green = "black"
 
-                    span_empate.innerHTML = empate + 1
+                        vezJogador = false
 
-                    //funcao empate
+                        setTimeout(() => comprarCartaBot(), 1000)
+                    }
+                }
+                //  vezJogador // funcoes sem chamar o bot
+                else if (botParou) {
+                    if (pontosUsuario > 20) {
+                        span_statusUsuario.innerHTML = "Perdeu"
+                        span_statusUsuario.style.color = "red"
+                        span_statusBot.innerHTML = "Ganhou"
+                        span_statusBot.style.color = "green"
 
-                    jogadorParou = true
-                } else if (pontosUsuario == 20) {
-                    span_statusUsuario.innerHTML = "Ganhou"
-                    span_statusUsuario.style.color = "black"
-                    span_statusBot.innerHTML = "Perdeu"
-                    span_statusBot.style.color = "red"
+                        setTimeout(() => derrota(), 1000)
+                    } else if (pontosUsuario == 20 && pontosBot == 20) {
+                        span_statusUsuario.innerHTML = "Empate"
+                        span_statusUsuario.style.color = "yellow"
+                        span_statusBot.innerHTML = "Empate"
+                        span_statusBot.style.color = "yellow"
 
-                    var vitoria = Number(span_vitoria.value)
+                        setTimeout(() => empate(), 1000)
+                    } else if (pontosUsuario == 20) {
+                        span_statusUsuario.innerHTML = "Ganhou"
+                        span_statusUsuario.style.color = "green"
+                        span_statusBot.innerHTML = "Perdeu"
+                        span_statusBot.style.color = "red"
 
-                    span_vitoria.innerHTML = vitoria + 1
-
-                    jogadorParou = true
-
-                    //funcao vitoria
+                        setTimeout(() => vitoria(), 1000)
+                    } else if (pontosUsuario < 20) {
+                        span_statusUsuario.innerHTML = "Sua vez"
+                        span_statusUsuario.style.color = "green"
+                    }
                 }
             }
         }
@@ -289,98 +325,105 @@
         // NO FINAL EU VEJO OQ O BOT FAZ, PARA OU
 
         if (!botParou) {
-            jogadaBot += 1
-            var div_jogada = div_jogadas[jogadaBot - 1].Bott
 
-            var numero_aleatorio = Math.floor(Math.random() * 10)
+            if (pontosBot > pontosUsuario && jogadorParou) {
+                span_statusBot.innerHTML = "Ganhou"
+                span_statusBot.style.color = "green"
+                span_statusUsuario.innerHTML = "Perdeu"
+                span_statusUsuario.style.color = "red"
 
-            pontosBot += numero_aleatorio
+                travarValidacao = true
+                setTimeout(() => vitoria(), 1000)
+            } else {
+                jogadaBot += 1
+                var div_jogada = div_jogadas[jogadaBot - 1].Bott
 
-            div_jogada.src = cartas_compradas[numero_aleatorio].imagem
-            span_pontosBot.innerHTML = pontosBot
+                var numero_aleatorio = Math.floor(Math.random() * 10)
+
+                pontosBot += cartas_compradas[numero_aleatorio].valor
+
+                div_jogada.src = cartas_compradas[numero_aleatorio].imagem
+                span_pontosBot.innerHTML = pontosBot
+            }
+
 
             // jogador parou, chamo eu mesmo e ja posso fazer o update
-            if (jogadorParou) {
+            if (jogadorParou && !travarValidacao) {
                 if (pontosBot > 20) {
                     span_statusBot.innerHTML = "Perdeu"
                     span_statusBot.style.color = "red"
                     span_statusUsuario.innerHTML = "Ganhou"
                     span_statusUsuario.style.color = "green"
 
-                    var vitoria = Number(span_vitoria.value)
 
-                    span_vitoria.innerHTML = vitoria + 1
-
-                    //funcao vitoria
+                    setTimeout(() => vitoria(), 1000)
                 } else if (pontosBot == 20 && pontosUsuario == 20) {
                     span_statusUsuario.innerHTML = "Empate"
-                    span_statusUsuario.style.color = "black"
+                    span_statusUsuario.style.color = "yellow"
                     span_statusBot.innerHTML = "Empate"
-                    span_statusBot.style.color = "black"
+                    span_statusBot.style.color = "yellow"
 
-                    var empate = Number(span_empate.value)
 
-                    span_empate.innerHTML = empate + 1
-
-                    //funcao empate
+                    setTimeout(() => empate(), 1000)
                 } else if (pontosBot == 20) {
                     span_statusUsuario.innerHTML = "Perdeu"
                     span_statusUsuario.style.color = "red"
                     span_statusBot.innerHTML = "Ganhou"
                     span_statusBot.style.color = "green"
 
-                    var derrota = Number(span_derrota.value)
-
-                    span_derrota.innerHTML = derrota + 1
-
-                    //funcao perdeu
+                    setTimeout(() => derrota(), 1000)
                 } else if (pontosBot > pontosUsuario) {
                     span_statusUsuario.innerHTML = "Perdeu"
                     span_statusUsuario.style.color = "red"
                     span_statusBot.innerHTML = "Ganhou"
                     span_statusBot.style.color = "green"
 
-                    var derrota = Number(span_derrota.value)
+                    setTimeout(() => derrota(), 1000)
+                } else if (pontosBot == pontosUsuario && pontosBot > 16) {
+                    span_statusUsuario.innerHTML = "Empate"
+                    span_statusUsuario.style.color = "yellow"
+                    span_statusBot.innerHTML = "Empate"
+                    span_statusBot.style.color = "yellow"
 
-                    span_derrota.innerHTML = derrota + 1
-
-                    //funcao perdeu
-                } else if (pontosBot < pontosUsuario) {
+                    setTimeout(() => empate(), 1000)
+                } else if (pontosBot <= pontosUsuario) {
+                    span_statusBot.innerHTML = "Jogando"
+                    span_statusBot.style.color = "black"
                     setTimeout(() => comprarCartaBot(), 1000)
                 }
             }
             // se jogador n parou, n chamo ninguem 
             else {
 
-                if(pontosBot > 20) {
-                span_statusBot.innerHTML = "Perdeu"
-                span_statusBot.style.color = "red"
-                span_statusUsuario.innerHTML = "Ganhou"
-                span_statusUsuario.style.color = "green"
+                if (pontosBot > 20) {
+                    span_statusBot.innerHTML = "Perdeu"
+                    span_statusBot.style.color = "red"
+                    span_statusUsuario.innerHTML = "Ganhou"
+                    span_statusUsuario.style.color = "green"
 
-                var vitoria = Number(span_vitoria.value)
 
-                span_vitoria.innerHTML = vitoria + 1
+                    setTimeout(() => vitoria(), 1000)
+                } else if (pontosBot == 20) {
+                    span_statusBot.innerHTML = "Parou"
+                    span_statusBot.style.color = "yellow"
+                    span_statusUsuario.innerHTML = "Sua vez"
+                    span_statusUsuario.style.color = "green"
 
-                botParou = true
-                //funcao vitoria
-                } else if(pontosBot == 20) {
-                span_statusBot.innerHTML = "Parou"
-                span_statusBot.style.color = "black"
-                span_statusUsuario.innerHTML = "Sua vez"
-                span_statusUsuario.style.color = "green"
-
-                botParou = true
-                vezJogador = true
-                } else if(pontosBot >= 17 ) {
+                    botParou = true
+                    vezJogador = true
+                } else if (pontosBot >= 17) {
                     botParou = true
 
                     vezJogador = true
                     span_statusBot.innerHTML = "Parou"
-                span_statusBot.style.color = "black"
-                span_statusUsuario.innerHTML = "Sua vez"
-                span_statusUsuario.style.color = "green"
+                    span_statusBot.style.color = "yellow"
+                    span_statusUsuario.innerHTML = "Sua vez"
+                    span_statusUsuario.style.color = "green"
                 } else {
+                    span_statusBot.innerHTML = "Em espera"
+                    span_statusBot.style.color = "black"
+                    span_statusUsuario.innerHTML = "Sua vez"
+                    span_statusUsuario.style.color = "green"
                     vezJogador = true
                 }
             }
@@ -396,24 +439,267 @@
 
             // VERIFICO OS NUMEROS
             if (pontosBot == pontosUsuario) {
-                alert("empatou")
+                span_statusBot.innerHTML = "Empate"
+                span_statusBot.style.color = "yellow"
+                span_statusUsuario.innerHTML = "Empate"
+                span_statusUsuario.style.color = "yellow"
 
-                // FUNCAO DE EMPATE
+                setTimeout(() => empate(), 1000)
             } else if (pontosUsuario > pontosBot) {
-                alert("ganhou")
 
-                // FUNÇÃO DE GANHAR DA REFRASH QUANDO ATUALIZAR
+                span_statusBot.innerHTML = "Perdeu"
+                span_statusBot.style.color = "red"
+                span_statusUsuario.innerHTML = "Ganhou"
+                span_statusUsuario.style.color = "green"
+
+                setTimeout(() => vitoria(), 1000)
             } else if (pontosBot > pontosUsuario) {
-                alert("perdeu")
+
+                span_statusUsuario.innerHTML = "Perdeu"
+                span_statusUsuario.style.color = "red"
+                span_statusBot.innerHTML = "Ganhou"
+                span_statusBot.style.color = "green"
+
+                setTimeout(() => derrota(), 1000)
             }
 
         } else {
-
+            span_statusUsuario.innerHTML = "Parou"
+            span_statusUsuario.style.color = "yellow"
             setTimeout(() => comprarCartaBot(), 1000)
         }
+    }
+
+    // FUNCOES DAS CARTAS COMPRADAS
+
+    function carta_maisUm() {
+        valorCartaJogada = 1
+
+        for (var contador = 0; contador < lista_compras.length; contador++) {
+
+            if (lista_compras[contador].funcao == "carta_maisUm()") {
+                posicaoCarta = contador
+                imagemCarta = lista_compras[contador].imagem
+            }
+        }
+
+        cartaJogadaComprada = true
+        comprarCarta()
+    }
+
+    function carta_maisDois() {
+        valorCartaJogada = 2
+
+        for (var contador = 0; contador < lista_compras.length; contador++) {
+
+            if (lista_compras[contador].funcao == "carta_maisDois()") {
+                posicaoCarta = contador
+                imagemCarta = lista_compras[contador].imagem
+            }
+        }
+
+        cartaJogadaComprada = true
+        comprarCarta()
+    }
+
+    function carta_maisTres() {
+        valorCartaJogada = 3
+
+        for (var contador = 0; contador < lista_compras.length; contador++) {
+
+            if (lista_compras[contador].funcao == "carta_maisTres()") {
+                posicaoCarta = contador
+                imagemCarta = lista_compras[contador].imagem
+            }
+        }
+
+        cartaJogadaComprada = true
+        comprarCarta()
+    }
+
+    function carta_maisQuatro() {
+        valorCartaJogada = 4
+
+        for (var contador = 0; contador < lista_compras.length; contador++) {
+
+            if (lista_compras[contador].funcao == "carta_maisQuatro()") {
+                posicaoCarta = contador
+                imagemCarta = lista_compras[contador].imagem
+            }
+        }
+
+        cartaJogadaComprada = true
+        comprarCarta()
+    }
+
+    function carta_maisCinco() {
+        valorCartaJogada = 5
+
+        for (var contador = 0; contador < lista_compras.length; contador++) {
+
+            if (lista_compras[contador].funcao == "carta_maisCinco()") {
+                posicaoCarta = contador
+                imagemCarta = lista_compras[contador].imagem
+            }
+        }
+
+        cartaJogadaComprada = true
+        comprarCarta()
+    }
+
+    function carta_menosUm() {
+        valorCartaJogada = -1
+
+        for (var contador = 0; contador < lista_compras.length; contador++) {
+
+            if (lista_compras[contador].funcao == "carta_menosUm()") {
+                posicaoCarta = contador
+                imagemCarta = lista_compras[contador].imagem
+            }
+        }
+
+        cartaJogadaComprada = true
+        comprarCarta()
+    }
+
+    function carta_menosDois() {
+        valorCartaJogada = -2
+
+        for (var contador = 0; contador < lista_compras.length; contador++) {
+
+            if (lista_compras[contador].funcao == "carta_menosDois()") {
+                posicaoCarta = contador
+                imagemCarta = lista_compras[contador].imagem
+            }
+        }
+
+        cartaJogadaComprada = true
+        comprarCarta()
+    }
+
+    function carta_menosTres() {
+        valorCartaJogada = -3
+
+        for (var contador = 0; contador < lista_compras.length; contador++) {
+
+            if (lista_compras[contador].funcao == "carta_menosTres()") {
+                posicaoCarta = contador
+                imagemCarta = lista_compras[contador].imagem
+            }
+        }
+
+        cartaJogadaComprada = true
+        comprarCarta()
+    }
+
+    function carta_menosQuatro() {
+        valorCartaJogada = -4
+
+        for (var contador = 0; contador < lista_compras.length; contador++) {
+
+            if (lista_compras[contador].funcao == "carta_menosQuatro()") {
+                posicaoCarta = contador
+                imagemCarta = lista_compras[contador].imagem
+            }
+        }
+
+        cartaJogadaComprada = true
+        comprarCarta()
+    }
+
+    function carta_menosCinco() {
+        valorCartaJogada = -5
+
+        for (var contador = 0; contador < lista_compras.length; contador++) {
+
+            if (lista_compras[contador].funcao == "carta_menosCinco()") {
+                posicaoCarta = contador
+                imagemCarta = lista_compras[contador].imagem
+            }
+        }
+
+        cartaJogadaComprada = true
+        comprarCarta()
     }
 
     // BOT TA COMPRANDO MESMO TENDO MAIS
     // ARRUMAR OS DADOS Q APARECEM NO STATUS
     // da um SELECT EM VITORIA E DE DERROTA E FAZ A BOA
+
+
+    // FUNCOES PARA ATUALIZAR VITORIA, EMPATE, DERROTA
+    function vitoria() {
+        sessionStorage.VITORIA_USUARIO = Number(sessionStorage.VITORIA_USUARIO) + 1
+        fetch(`/avisos/vitoria/${sessionStorage.getItem("ID_USUARIO")}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                vitoria: sessionStorage.VITORIA_USUARIO
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                alert("Você ganhou!")
+                window.location = "pazaak.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    function empate() {
+        sessionStorage.EMPATE_USUARIO = Number(sessionStorage.EMPATE_USUARIO) + 1
+        fetch(`/avisos/empate/${sessionStorage.getItem("ID_USUARIO")}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                empate: sessionStorage.EMPATE_USUARIO
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                alert("Você empatou!")
+                window.location = "pazaak.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    function derrota() {
+        sessionStorage.DERROTA_USUARIO = Number(sessionStorage.DERROTA_USUARIO) + 1
+        fetch(`/avisos/derrota/${sessionStorage.getItem("ID_USUARIO")}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                derrota: sessionStorage.DERROTA_USUARIO
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                alert("Você perdeu!")
+                window.location = "pazaak.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
 </script>

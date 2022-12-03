@@ -153,3 +153,31 @@ function obterHoraAtual(idAquario) {
       });
 
   }
+
+  function cadastrarJogo() {
+    var idVar = sessionStorage.ID_USUARIO
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrarJogo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        idServer: idVar,
+      })
+    }).then(function (resposta) {
+
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+      } else {
+      }
+    }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+
+    return false;
+}

@@ -24,7 +24,7 @@
         <ul>
           <li><a href="index.html">Início</a></li>
           <li>|</li>
-          <li ><a href="cadastro.html">Cadastro</a></li>
+          <li><a href="cadastro.html">Cadastro</a></li>
           <li>|</li>
           <li class="agora"><a href="login.html">Login</a></li>
         </ul>
@@ -132,6 +132,24 @@
           sessionStorage.NOME_USUARIO = json.nome;
           sessionStorage.ID_USUARIO = json.idUsuario;
           sessionStorage.ANIVERSARIO_USUARIO = 0;
+
+          if (json.vitoria == undefined) {
+            sessionStorage.VITORIA_USUARIO = 0;
+          } else {
+            sessionStorage.VITORIA_USUARIO = json.vitoria;
+          }
+
+          if (json.empate == undefined) {
+            sessionStorage.EMPATE_USUARIO = 0;
+          } else {
+            sessionStorage.EMPATE_USUARIO = json.empate;
+          }
+
+          if (json.derrota == undefined) {
+            sessionStorage.DERROTA_USUARIO = 0;
+          } else {
+            sessionStorage.DERROTA_USUARIO = json.derrota;
+          }
 
           mensagem_erro.innerHTML = `Login realizado! <br>
             Carregando...`;

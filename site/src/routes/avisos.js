@@ -23,12 +23,21 @@ router.post("/publicar/:idUsuario", function (req, res) {
     avisoController.publicar(req, res);
 });
 
-router.put("/editar/:idAviso", function (req, res) {
-    avisoController.editar(req, res);
-});
-
 router.delete("/deletar/:idAviso", function (req, res) {
     avisoController.deletar(req, res);
+});
+
+// funcoes para editar JOGO
+router.put("/vitoria/:idAviso", function (req, res) {
+    avisoController.vitoria(req, res);
+});
+
+router.put("/empate/:idAviso", function (req, res) {
+    avisoController.empate(req, res);
+});
+
+router.put("/derrota/:idAviso", function (req, res) {
+    avisoController.derrota(req, res);
 });
 
 module.exports = router;

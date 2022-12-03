@@ -93,26 +93,6 @@ function publicar(req, res) {
     }
 }
 
-function editar(req, res) {
-    var novaDescricao = req.body.descricao;
-    var idAviso = req.params.idAviso;
-
-    avisoModel.editar(novaDescricao, idAviso)
-        .then(
-            function (resultado) {
-                res.json(resultado);
-            }
-        )
-        .catch(
-            function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
-
-}
-
 function deletar(req, res) {
     var idAviso = req.params.idAviso;
 
@@ -131,12 +111,76 @@ function deletar(req, res) {
         );
 }
 
+// JOGO 
+
+function vitoria(req, res) {
+    var vitoria = req.body.vitoria;
+    var idUsuario = req.params.idAviso;
+
+    avisoModel.vitoria(vitoria, idUsuario)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+}
+
+function empate(req, res) {
+    var empate = req.body.empate;
+    var idUsuario = req.params.idAviso;
+
+    avisoModel.empate(empate, idUsuario)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+}
+
+function derrota(req, res) {
+    var derrota = req.body.derrota;
+    var idUsuario = req.params.idAviso;
+
+    avisoModel.derrota(derrota, idUsuario)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+}
+
 module.exports = {
     testar,
     listar,
     listarPorUsuario,
     pesquisarDescricao,
     publicar,
-    editar,
-    deletar
+    deletar,
+    vitoria,
+    empate,
+    derrota
 }

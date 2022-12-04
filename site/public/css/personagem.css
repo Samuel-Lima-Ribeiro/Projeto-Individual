@@ -42,19 +42,66 @@ body {
 }
 
 .imgYodaTela {
-    padding: 75px 150px;
+    padding: 80px 150px;
+    margin: 0 0 10px 0;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("../assets/personagens/yodaInfo.jpg");
-    border-radius: 20px;
+    background-image: url("../assets/personagens/yoda.png");
+    border-radius: 10px;
 }
 
 .imglukeTela {
-    padding: 75px 150px;
+    padding: 80px 150px;
+    margin: 0 0 10px 0;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("../assets/personagens/lukeInfo.jpg");
-    border-radius: 20px;
+    background-image: url("../assets/personagens/luke.png");
+    border-radius: 10px;
+}
+
+.imgVaderTela {
+    padding: 80px 150px;
+    margin: 0 0 10px 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../assets/personagens/vader.png");
+    border-radius: 10px;
+}
+
+.imgleiaTela {
+    padding: 80px 150px;
+    margin: 0 0 10px 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../assets/personagens/leia.png");
+    border-radius: 10px;
+}
+
+.imgKenobiTela {
+    padding: 80px 150px;
+    margin: 0 0 10px 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../assets/personagens/kenobi.png");
+    border-radius: 10px;
+}
+
+.imgSoloTela {
+    padding: 80px 150px;
+    margin: 0 0 10px 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../assets/personagens/han-solo.png");
+    border-radius: 10px;
+}
+
+.imgPalpatineTela {
+    padding: 80px 150px;
+    margin: 0 0 10px 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../assets/personagens/palpatine.png");
+    border-radius: 10px;
 }
 
 .Voto{
@@ -96,4 +143,14 @@ button:hover {
     margin: 20px 20px 20px 70px; 
     color: white;
     font-size: 300px;
+}
+
+.descPersonagem {
+    font-size: 20px;
+}
+
+.frase {
+    color: #ffffff;
+    font: bold;
+    font-size: 21px;
 }

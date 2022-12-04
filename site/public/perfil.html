@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil</title>
+  <link rel="shortcut icon" href="assets/img/ordem-jedi.png" sizes="32x32" />
+  <link rel="stylesheet" href="css/estilos-gerais.css" />
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/indexUsuario.css">
+  <script src="js/funcoes.js"></script>
+</head>
+
+<body>
+  <!--HEADER-->
+  <header>
+    <div class="container">
+      <div class="titulo">
+        <h1>STAR WARS</h1>
+      </div>
+
+      <div class="navegacao">
+        <ul>
+          <li class="agora"><a href="perfil.html">Perfil</a></li>
+          <li>|</li>
+          <li><a href="personagem.html">Personagem</a></li>
+          <li>|</li>
+          <li><a href="pazaak.html">Pazaak</a></li>
+          <li>|</li>
+          <li onclick="limparSessao()"><a href="login.html">Sair</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner">
+
+        <div class="container">
+          <div class="caixa-formulario">
+            <div class="informacoes">
+              <h2 style="text-align: center; font-size: 40px;">Perfil</h2>
+              <img id="imagem_perfil" style="width: 120px;" src="" alt="">
+            </div>
+            <div class="campo">
+            <p><span class="info">Nome:</span> 
+            <span id="span_nomeUsuario"></span></p>
+            </div>
+            <div class="campo">
+            <p><span class="info">Email: </span>
+              <span id="span_emailUsuario"></span></p>
+            </div>
+            <div class="campo">
+              <p><span class="info">Idade:</span>
+                <span id="span_idadeUsuario"></span></p>
+            </div>
+            <div class="campo">
+              <p><span class="info">Personagem favorito:</span>
+                <span id="span_personagemUsuario"></span></p>
+            </div>
+            <div class="campo">
+              <p><span class="info">Pazaak:</span>
+                V:<span id="span_vitoria"></span> E:<span id="span_empate"></span> D:<span id="span_derrota"></span></p>
+          </div>
+        </div>
+
+    </section>
+  </main>
+  
+  <!--RODAPÉ/FOOTER-->
+  <footer>
+    <div class="container">
+      <div class="informacoes">
+        <p>Usuarios <br>
+          cadastrados: <span id="qtd_usuarios">0</span></p> <br>
+        <p>Hora atual: <span id="horas_atual"></span></p>
+      </div>
+      <div class="direitos">
+        <p>Samuel Lima Ribeiro &copy; 2022 todos os direitos reservados</p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
+
+<script>
+  var persoangem = "Você não votou em nenhum personagem!"
+
+  let proximaAtualizacao;
+  window.onload = obterNumerosUsarios();
+  window.onload = obterHoraAtual();
+  window.onload = alertaParabens();
+
+  
+  span_nomeUsuario.innerHTML = sessionStorage.NOME_USUARIO;
+  span_emailUsuario.innerHTML = sessionStorage.EMAIL_USUARIO;
+  span_idadeUsuario.innerHTML = sessionStorage.IDADE_USUARIO;
+  span_vitoria.innerHTML = sessionStorage.VITORIA_USUARIO;
+  span_derrota.innerHTML = sessionStorage.DERROTA_USUARIO;
+  span_empate.innerHTML = sessionStorage.EMPATE_USUARIO;
+
+  if(sessionStorage.PERSONAGEM_USUARIO == 1) {
+    persoangem = "Yoda"
+    imagem_perfil.src = `assets/perfil/yodaIcon.png`
+  } else if(sessionStorage.PERSONAGEM_USUARIO == 2) {
+    persoangem = "Luke Skywalker"
+    imagem_perfil.src = `assets/perfil/lukeIcon.png`
+  } else if(sessionStorage.PERSONAGEM_USUARIO == 3) {
+    persoangem = "Darth Vader"
+    imagem_perfil.src = `assets/perfil/vaderIcon.png`
+  } else if(sessionStorage.PERSONAGEM_USUARIO == 4) {
+    persoangem = "Leia Organa"
+    imagem_perfil.src = `assets/perfil/leiaIcon.png`
+  } else if(sessionStorage.PERSONAGEM_USUARIO == 5) {
+    persoangem = "Obi-Wan Kenobi"
+    imagem_perfil.src = `assets/perfil/kenobiIcon.png`
+  } else if(sessionStorage.PERSONAGEM_USUARIO == 6) {
+    persoangem = "Han Solo"
+    imagem_perfil.src = `assets/perfil/soloIcon.png`
+  } else if(sessionStorage.PERSONAGEM_USUARIO == 7) {
+    persoangem = "Palpatine"
+    imagem_perfil.src = `assets/perfil/palpatineIcon.png`
+  }
+
+  span_personagemUsuario.innerHTML = persoangem;
+
+
+  // FUNCAO PARABENS
+
+
+  function alertaParabens(idSensor) {
+    var idSensor = sessionStorage.ID_USUARIO
+
+    if (proximaAtualizacao != undefined) {
+      clearTimeout(proximaAtualizacao);
+    }
+
+    fetch(`/medidas/Parabens/${idSensor}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+
+          plotarGraficoParabens(resposta);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+
+  function plotarGraficoParabens(resposta, idSensor) {
+
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      var data = registro.aniversario
+    }
+
+    var alertaFoiDado = Number(sessionStorage.ANIVERSARIO_USUARIO)
+    if (!alertaFoiDado) {
+      if (data != null) {
+        alert("Feliz aniversário! Que a força esteja com você!")
+        sessionStorage.ANIVERSARIO_USUARIO = 1
+      }
+    }
+
+  }
+
+
+
+</script>

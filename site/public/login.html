@@ -39,7 +39,7 @@
           <h2>Entre na sua conta</h2>
           <div class="campo">
             <label for="email">Email:</label>
-            <input type="email" id="input_email" placeholder="email@email.com">
+            <input type="email" id="input_email" placeholder="c3por2d2@email.com">
           </div><br>
           <div class="campo">
             <label for="senha">Senha:</label>
@@ -132,6 +132,8 @@
           sessionStorage.NOME_USUARIO = json.nome;
           sessionStorage.ID_USUARIO = json.idUsuario;
           sessionStorage.ANIVERSARIO_USUARIO = 0;
+          sessionStorage.IDADE_USUARIO = json.Dtnasc;
+          sessionStorage.PERSONAGEM_USUARIO = json.fkPersonagem;
 
           if (json.vitoria == undefined) {
             sessionStorage.VITORIA_USUARIO = 0;

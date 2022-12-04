@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="assets/img/ordem-jedi.png" sizes="32x32"/>
   <title>Personagens</title>
   <link rel="stylesheet" href="css/estilos-gerais.css">
   <link rel="stylesheet" href="css/personagem.css">
@@ -22,6 +23,8 @@
 
       <div class="navegacao">
         <ul>
+          <li><a href="perfil.html">Perfil</a></li>
+          <li>|</li>
           <li class="agora"><a href="personagem.html">Personagem</a></li>
           <li>|</li>
           <li><a href="pazaak.html">Pazaak</a></li>
@@ -45,7 +48,7 @@
       </div>
       <div class="frase">
         <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
-          de tudo. O maior professor, o fracasso é "</h2>
+          de tudo. O maior professor, o fracasso é. "</h2>
       </div>
     </div>
 
@@ -59,8 +62,7 @@
         <img class="imglukeTela">
       </div>
       <div class="frase">
-        <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
-          de tudo. O maior professor, o fracasso é "</h2>
+        <h2>" Eu sou um Jedi, como meu pai foi antes de mim. "</h2>
       </div>
     </div>
 
@@ -71,11 +73,10 @@
           <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de
             tudo. O maior professor, o fracasso é..</p>
         </div>
-        <img class="imglukeTela">
+        <img class="imgVaderTela">
       </div>
       <div class="frase">
-        <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
-          de tudo. O maior professor, o fracasso é "</h2>
+        <h2>" Luke, você pode destruir o Imperador. Ele previu isso. É o seu destino. Junte-se a mim, e juntos podemos governar a galáxia como pai e filho. "</h2>
       </div>
     </div>
 
@@ -86,11 +87,10 @@
           <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de
             tudo. O maior professor, o fracasso é..</p>
         </div>
-        <img class="imglukeTela">
+        <img class="imgleiaTela">
       </div>
       <div class="frase">
-        <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
-          de tudo. O maior professor, o fracasso é "</h2>
+        <h2>" A esperança é como o sol. Se você apenas acredita quando vê, você nunca vai sobreviver à noite. "</h2>
       </div>
     </div>
 
@@ -101,11 +101,10 @@
           <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de
             tudo. O maior professor, o fracasso é..</p>
         </div>
-        <img class="imglukeTela">
+        <img class="imgKenobiTela">
       </div>
       <div class="frase">
-        <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
-          de tudo. O maior professor, o fracasso é "</h2>
+        <h2>" Seus olhos podem trair você, não confie neles. "</h2>
       </div>
     </div>
 
@@ -116,11 +115,10 @@
           <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de
             tudo. O maior professor, o fracasso é..</p>
         </div>
-        <img class="imglukeTela">
+        <img class="imgSoloTela">
       </div>
       <div class="frase">
-        <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
-          de tudo. O maior professor, o fracasso é "</h2>
+        <h2>" Nunca me diga as probabilidades. "</h2>
       </div>
     </div>
 
@@ -131,11 +129,10 @@
           <p>Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima de
             tudo. O maior professor, o fracasso é..</p>
         </div>
-        <img class="imglukeTela">
+        <img class="imgPalpatineTela">
       </div>
       <div class="frase">
-        <h2>" Transmita o que aprendeu. Força, mestria. Mas fraqueza, insensatez, fracasso também. Sim, fracasso acima
-          de tudo. O maior professor, o fracasso é "</h2>
+        <h2>" O lado negro da Força é o caminho para muitas habilidades que alguns consideram ser ... Antinatural. "</h2>
       </div>
     </div>
 
@@ -186,36 +183,43 @@
 
   function votarYoda() {
     personagemEscolhido = 1
+    sessionStorage.PERSONAGEM_USUARIO = 1
     votar()
   }
 
   function votarLuke() {
     personagemEscolhido = 2
+    sessionStorage.PERSONAGEM_USUARIO = 2
     votar()
   }
 
   function votarVader() {
     personagemEscolhido = 3
+    sessionStorage.PERSONAGEM_USUARIO = 3
     votar()
   }
 
   function votarLeia() {
     personagemEscolhido = 4
+    sessionStorage.PERSONAGEM_USUARIO = 4
     votar()
   }
 
   function votarKenobi() {
     personagemEscolhido = 5
+    sessionStorage.PERSONAGEM_USUARIO = 5
     votar()
   }
 
   function votarSolo() {
     personagemEscolhido = 6
+    sessionStorage.PERSONAGEM_USUARIO = 6
     votar()
   }
 
   function votarPalpatine() {
     personagemEscolhido = 7
+    sessionStorage.PERSONAGEM_USUARIO = 7
     votar()
   }
 

@@ -62,7 +62,7 @@ function buscarRanking(idAquario, limite_linhas) {
                     where fk_aquario = ${idAquario}
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select nome as usuario, vitoria, empate, derrota from jogo join usuario on usuario.idusuario = jogo.fkusuario where vitoria > 0 or empate > 0 or derrota > 0 order by vitoria;`;
+        instrucaoSql = `select nome as usuario, vitoria, empate, derrota, idusuario from jogo join usuario on usuario.idusuario = jogo.fkusuario where vitoria > 0 or empate > 0 or derrota > 0 order by vitoria;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

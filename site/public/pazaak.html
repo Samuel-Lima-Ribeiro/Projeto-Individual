@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/ordem-jedi.png" sizes="32x32"/>
     <title>Pazaak</title>
     <link rel="stylesheet" href="css/estilos-gerais.css">
     <link rel="stylesheet" href="css/pazaak.css">
@@ -21,6 +22,8 @@
 
             <div class="navegacao">
                 <ul>
+                    <li><a href="perfil.html">Perfil</a></li>
+                    <li>|</li>
                     <li><a href="personagem.html">Personagem</a></li>
                     <li>|</li>
                     <li class="agora"><a href="pazaak.html">Pazaak</a></li>
@@ -42,7 +45,7 @@
                     venceu a rodada.</p>
             </div>
             <div class="atualizacao">
-                Vitória: <span style="color: green;" id="span_vitoria">0</span> || Empates: <span style="color: yellow;" id="span_empate">0</span> || Derrotas: <span
+                Vitórias: <span style="color: green;" id="span_vitoria">0</span> || Empates: <span style="color: yellow;" id="span_empate">0</span> || Derrotas: <span
                   style="color: red;"  id="span_derrota">0</span>
             </div>
             <div class="botao">
@@ -735,8 +738,13 @@ function obterRanking(idSensor) {
               var vitoria = registro.vitoria
               var empate = registro.empate
               var derrota = registro.derrota
+              var id = registro.idusuario
 
-              ranking.innerHTML += `#${contador} || ${usuario} || Vitórias: <span style="color: green;"> ${vitoria} </span> || Empates: <span style="color: yellow;"> ${empate} </span> || Derrotas: <span style="color: red;"> ${derrota} </span> <br> <br>`
+              if(id == sessionStorage.ID_USUARIO) {
+                ranking.innerHTML += `<span style="background-color: #321323 ;">#${contador} || ${usuario} || Vitórias: <span style="color: green;"> ${vitoria} </span> || Empates: <span style="color: yellow;"> ${empate} </span> || Derrotas: <span style="color: red;"> ${derrota} </span> <span> <br> <br>`
+              } else {
+                ranking.innerHTML += `#${contador} || ${usuario} || Vitórias: <span style="color: green;"> ${vitoria} </span> || Empates: <span style="color: yellow;"> ${empate} </span> || Derrotas: <span style="color: red;"> ${derrota} </span> <br> <br>`
+              }
               contador += 1
           }  
       }

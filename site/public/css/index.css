@@ -1,10 +1,8 @@
-/*CONTEÚDO DA PÁGINA*/
-
-html {
-  scroll-behavior: smooth;
-}
-
 /*BANNER*/
+
+body {
+  background-image: radial-gradient(circle, #808080, #5f5f5f, #3f3f3f, #222222, #000000);
+}
 
 .banner {
   width: 100%;
@@ -65,95 +63,53 @@ html {
   color: #edd70c;
 }
 
-  /*SOCIAL*/
-  .banner2 {
-    background-color: #def1ff;
-    width: 100%;
-    display: flex;
-    margin-top: -5px;
-    /* padding: 25px 0px; */
-    height: 75vh;
-    box-shadow: 0px 0px 42px 12px rgb(0 0 0 / 41%);
-  }
-  
-  .banner2 .caixas {
-    display: flex;
-  
-  }
-  
-  .banner2 h3 {
-    font-size: 45px;
-    font-weight: bold;
-    color: #edd70c;
-  }
-  
-  .caixa {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 15px;
-    display: flex;
-    padding: 0 20px;
-  }
-  
-  .banner2 .caixa img {
-    height: 200px;
-    width: 200px;
-    padding: 20px 0px;
-    background-color: white;
-    box-shadow: 0px 0px 42px -15px rgb(0 0 0 / 41%);
-    cursor: pointer;
-  }
-
-  .banner2 .caixa img:hover {
-    position: relative;
-    top:-10px;
-    transition: all .0.5s ease-in-out;
-  }
-  
-  .caixa h4 {
-    margin: 15px 0;
-    color: #36A2EB;
-    font-size: 25px;
-    font-weight: bold;
-  }
-  
-  .caixa p {
-    text-align: center;
-  }
-  
-  .caixa img {
-    width: 170px;
-  }
-  
-  .banner3 {
-      background-color: #F2A19A;
-      width: 100%;
-      display: flex;
-      margin-top: -5px;
-      height: 100vh;
-      background-repeat: no-repeat;
-      background-size: 555px;
-      background-position-x: 95%;
-      background-position-y: 80%;
-      box-shadow: 0px 0px 42px 12px rgb(0 0 0 / 41%);
-  }
-  
-  .banner3 .caixas {
-    display: flex;
-    flex-direction: column;
-    height: 90%;
-    width: 110%;
+.bannerPersonagem {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 3px gray solid;
 }
-  
-  .banner3 .caixa {
-    background-color: white;
-    border: none;
-    border-radius: 15px;
-    padding: 30px 5px;
-    margin-bottom: 25px;
-    box-shadow: 0px 0px 42px -18px rgb(0 0 0 / 41%);
-    cursor: pointer;
-    transition: 0.9s;
-    width: 55%;
+
+.nomePersonagem {
+  text-align: center;
+  margin: 10px 0 0 0;
+  font-size: 35px;
+  color: #edd70c;
+}
+
+.infoPersonagem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: white;
+}
+
+.descPersonagem {
+  align-items: center;
+  font-size: 20px;
+  margin: 0 50px 0;
+}
+
+.frase {
+  text-align: center;
+  margin: 5px 60px 0;
+  padding: 0px 0px 15px 0;
+}
+
+.imgLucas {
+  padding: 80px 150px;
+  margin: 0 0 10px 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("../assets/img/lucas.jpg");
+  border-radius: 10px;
+}
+
+.imgGordon {
+  padding: 80px 150px;
+  margin: 0 20px 10px 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("../assets/img/gordon.jpg");
+  border-radius: 10px;
 }

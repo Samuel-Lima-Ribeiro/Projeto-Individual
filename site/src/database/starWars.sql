@@ -32,7 +32,7 @@ insert into usuario  values
 (null, 'The Champ', 'caioRibeiro@gmail.com', 'starUooo', '2003-10-07', 1),
 (null, 'Palpatine66', 'caioRibeiro@gmail.com', 'starUooo', '2003-10-07', 7),
 (null, 'Darth Bane', 'caioRibeiro@gmail.com', 'starUooo', '2003-10-07', 4),
-(null, 'Shameika', 'caioRibeiro@gmail.com', 'starUooo', '2003-10-07', 5),
+(null, 'Kylo', 'caioRibeiro@gmail.com', 'starUooo', '2003-10-07', 5),
 (null, 'Darth Malgus', 'caioRibeiro@gmail.com', 'starUooo', '2003-10-07', 4),
 (null, 'Bastila Shan', 'caioRibeiro@gmail.com', 'starUooo', '2003-10-07', 3),
 (null, 'Fernando', 'fernandoSouza@gmail.com','Darthmaul', '2000-10-07', 2),
